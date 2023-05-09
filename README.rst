@@ -23,4 +23,4 @@ Copy the total path for `docs/build/html/index.html` and copy it into a web brow
 
 LaTeX
 ~~~~~
-Run pdflatex on the files found in `docs/build/latex/`.
+Run pdflatex on the files found in `docs/build/latex`, or simply open the file named `plslib.pdf` in that same directory.
