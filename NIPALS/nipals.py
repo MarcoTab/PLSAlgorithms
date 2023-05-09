@@ -1,3 +1,5 @@
+import numpy as np
+
 class nipals:
     """
         Orthogonal weights: :math:`W^T_q W_q = I_q`
@@ -39,13 +41,73 @@ class nipals:
         if (X.shape[0] != Y.shape[0]):
             raise ValueError(f"X and Y must have the same first dimension. Current shapes: {X.shape} and {Y.shape}.")
         
-        q = int(q)
+        self.q = int(q)
 
-        if (q < 1 or q > X.shape[1]):
+        if (self.q < 1 or self.q > X.shape[1]):
             raise ValueError(f"q should be 1 and X's second dimension. Currently {q} and {X.shape[1]}.")
         
-        
-        ...
+
+        if (version == 'sample'):
+            curX = X
+            curY = Y
+            n = X.shape[0]
+
+            weights = None
+            scores = None
+            xloads = None
+            yloads = None
+
+            xloadsmat = np.zeros(0)
+            yloadsmat = np.zeros(0)
+            scoresmat = np.zeros(0)
+            self.W = np.zeros(0)
+
+            for _ in range(self.q):
+                # Compute sample covariance matrix
+                sample_cov = (1/n) * curX.T @ curY
+                
+                # Get eigenvectors
+                _, evecs = np.linalg.eigh(sample_cov)
+                # largest normalized eigenvector is the weight
+                weights = evecs[::-1][:, 0]
+
+                # Compute scores
+                scores = curX @ weights
+
+                # Compute X and Y loadings
+                xloads = (curX.T @ scores) / (scores.T @ scores)
+                yloads = (curY.T @ scores) / (scores.T @ scores)
+
+                # Deflation for X and Y
+                curX = curX - (scores @ xloads.T)
+                curY = curY - (scores @ yloads.T)
+
+                # Concatenate onto matrices
+                np.concatenate((self.W, weights), axis=1)
+                np.concatenate((xloadsmat, xloads), axis=1)
+                np.concatenate((yloadsmat, yloads), axis=1)
+                np.concatenate((scoresmat, scores), axis=1)
+
+            # Compute regession coefficients
+            self.beta = self.W @ np.linalg.inv(xloadsmat.T @ self.W) @ yloadsmat.T
+
+        else:
+            ...
+            # XY_cov = np.cov(X.T @ Y)
+            # _, eigvecs = np.linalg.eigh(XY_cov @ XY_cov.T)
+            # w = eigvecs[-1]
+            # self.W = w
+
+            # for d in range(self.q):
+            #     # Stopping condition
+            #     if (True): # TODO Replace with actual condition. What is Q???
+            #         self.q = d
+            #         break
+                
+            #     # 
+
+
+
 
     def transform(self, X):
         """
