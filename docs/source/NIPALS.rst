@@ -1,5 +1,7 @@
 NIPALS
 ------
-Nonlinear iterative partial least squares [REFERENCE HERE].
+Nonlinear Iterative Partial Least Squares [REFERENCE HERE].
 
-.. autofunction:: NIPALS.nipals.nipals
+.. autoclass:: NIPALS.nipals.nipals
+.. autofunction:: NIPALS.nipals.nipals.fit
+.. autofunction:: NIPALS.nipals.nipals.transform

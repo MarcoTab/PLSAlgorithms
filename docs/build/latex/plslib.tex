@@ -56,7 +56,6 @@
 % Set up styles of URL: it should be placed after hyperref.
 \urlstyle{same}
 
-\addto\captionsenglish{\renewcommand{\contentsname}{Contents:}}
 
 \usepackage{sphinxmessages}
 \setcounter{tocdepth}{1}
@@ -64,7 +63,7 @@
 
 
 \title{PLSLib}
-\date{May 08, 2023}
+\date{May 09, 2023}
 \release{0.1}
 \author{Marco Tabacman}
 \newcommand{\sphinxlogo}{\vbox{}}
@@ -88,17 +87,40 @@
 \sphinxAtStartPar
 \sphinxstylestrong{PLSLib} is a Python and R library implementing the various algorithms detailed in the book \sphinxstyleemphasis{Partial LeastSquares Regression and Related Dimension Reduction Methods} by R. Dennis Cook and Liliana Forzani, available \sphinxhref{about:blank}{here}.
 
+\sphinxstepscope
+
+
+\chapter{NIPALS}
+\label{\detokenize{NIPALS:nipals}}\label{\detokenize{NIPALS::doc}}
+\sphinxAtStartPar
+Nonlinear iterative partial least squares {[}REFERENCE HERE{]}.
+\index{nipals() (in module NIPALS.nipals)@\spxentry{nipals()}\spxextra{in module NIPALS.nipals}}
+
+\begin{fulllineitems}
+\phantomsection\label{\detokenize{NIPALS:NIPALS.nipals.nipals}}
+\pysigstartsignatures
+\pysiglinewithargsret{\sphinxcode{\sphinxupquote{NIPALS.nipals.}}\sphinxbfcode{\sphinxupquote{nipals}}}{\sphinxparam{\DUrole{n,n}{someotherinputsidontknowyet}}, \sphinxparam{\DUrole{n,n}{version}\DUrole{o,o}{=}\DUrole{default_value}{\textquotesingle{}sample\textquotesingle{}}}}{}
+\pysigstopsignatures
+\sphinxAtStartPar
+Orthogonal weights: \(W^T_q W_q = I_q\)
+
+\sphinxAtStartPar
+Envelope connection: \(\mathrm{span}(Wq) = \mathcal{E}_{Σ_X}(\mathcal{B})\), the \(Σ_X\)\sphinxhyphen{}envelope of \(\mathcal{B} \mathrel{\vcenter{:}}= \mathrm{span}(\beta)\).
+
+\sphinxAtStartPar
+Score matrix \(S_d\): These are traditional computational intermediaries,
+although they are not needed in the computation of \(\hat{\beta}_{\mathrm{npls}}\).
+
+\sphinxAtStartPar
+Algorithm \(\mathbb{N}\): This is an instance of Algorithm N discussed in \S{}1.5.3.
+PLS1 v. PLS2 Algorithm is applicable for PLS1 or PLS2 fits; See \S{}3.8.
+
+\end{fulllineitems}
+
+
 
 \chapter{Indices and tables}
 \label{\detokenize{index:indices-and-tables}}\begin{itemize}
-\item {} 
-\sphinxAtStartPar
-\DUrole{xref,std,std-ref}{genindex}
-
-\item {} 
-\sphinxAtStartPar
-\DUrole{xref,std,std-ref}{modindex}
-
 \item {} 
 \sphinxAtStartPar
 \DUrole{xref,std,std-ref}{search}
