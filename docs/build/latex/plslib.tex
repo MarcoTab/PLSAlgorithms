@@ -93,39 +93,95 @@
 \chapter{NIPALS}
 \label{\detokenize{NIPALS:nipals}}\label{\detokenize{NIPALS::doc}}
 \sphinxAtStartPar
-Nonlinear iterative partial least squares {[}REFERENCE HERE{]}.
-\index{nipals() (in module NIPALS.nipals)@\spxentry{nipals()}\spxextra{in module NIPALS.nipals}}
+Nonlinear Iterative Partial Least Squares {[}REFERENCE HERE{]}.
+\index{nipals (class in NIPALS.nipals)@\spxentry{nipals}\spxextra{class in NIPALS.nipals}}
 
 \begin{fulllineitems}
 \phantomsection\label{\detokenize{NIPALS:NIPALS.nipals.nipals}}
 \pysigstartsignatures
-\pysiglinewithargsret{\sphinxcode{\sphinxupquote{NIPALS.nipals.}}\sphinxbfcode{\sphinxupquote{nipals}}}{\sphinxparam{\DUrole{n,n}{someotherinputsidontknowyet}}, \sphinxparam{\DUrole{n,n}{version}\DUrole{o,o}{=}\DUrole{default_value}{\textquotesingle{}sample\textquotesingle{}}}}{}
+\pysigline{\sphinxbfcode{\sphinxupquote{class\DUrole{w,w}{  }}}\sphinxcode{\sphinxupquote{NIPALS.nipals.}}\sphinxbfcode{\sphinxupquote{nipals}}}
 \pysigstopsignatures
 \sphinxAtStartPar
 Orthogonal weights: \(W^T_q W_q = I_q\)
 
 \sphinxAtStartPar
-Envelope connection: \(\mathrm{span}(Wq) = \mathcal{E}_{Σ_X}(\mathcal{B})\), the \(Σ_X\)\sphinxhyphen{}envelope of \(\mathcal{B} \mathrel{\vcenter{:}}= \mathrm{span}(\beta)\).
+Envelope connection: \(\mathrm{span}(W_q) = \mathcal{E}_{\Sigma_X}(\mathcal{B})\), the \(\Sigma_X\)\sphinxhyphen{}envelope of \(\mathcal{B} \mathrel{\vcenter{:}}= \mathrm{span}(\beta)\).
 
 \sphinxAtStartPar
 Score matrix \(S_d\): These are traditional computational intermediaries,
 although they are not needed in the computation of \(\hat{\beta}_{\mathrm{npls}}\).
 
 \sphinxAtStartPar
-Algorithm \(\mathbb{N}\): This is an instance of Algorithm N discussed in \S{}1.5.3.
-PLS1 v. PLS2 Algorithm is applicable for PLS1 or PLS2 fits; See \S{}3.8.
+Algorithm \(\mathbb{N}\): This is an instance of Algorithm \(\mathbb{N}\) discussed in \S{}1.5.3.
+
+\sphinxAtStartPar
+PLS1 v. PLS2: Algorithm is applicable for PLS1 or PLS2 fits; See \S{}3.8.
 
 \end{fulllineitems}
 
+\index{fit() (in module NIPALS.nipals.nipals)@\spxentry{fit()}\spxextra{in module NIPALS.nipals.nipals}}
 
-
-\chapter{Indices and tables}
-\label{\detokenize{index:indices-and-tables}}\begin{itemize}
+\begin{fulllineitems}
+\phantomsection\label{\detokenize{NIPALS:NIPALS.nipals.nipals.fit}}
+\pysigstartsignatures
+\pysiglinewithargsret{\sphinxcode{\sphinxupquote{NIPALS.nipals.nipals.}}\sphinxbfcode{\sphinxupquote{fit}}}{\sphinxparam{\DUrole{n,n}{self}}, \sphinxparam{\DUrole{n,n}{X}}, \sphinxparam{\DUrole{n,n}{Y}}, \sphinxparam{\DUrole{n,n}{q}}, \sphinxparam{\DUrole{n,n}{version}\DUrole{o,o}{=}\DUrole{default_value}{\textquotesingle{}sample\textquotesingle{}}}}{}
+\pysigstopsignatures
+\sphinxAtStartPar
+Fit this model to the training data \sphinxtitleref{X}, \sphinxtitleref{Y} using \sphinxtitleref{q} dimensions.
+\begin{quote}\begin{description}
+\sphinxlineitem{Parameters}\begin{itemize}
 \item {} 
 \sphinxAtStartPar
-\DUrole{xref,std,std-ref}{search}
+\sphinxstyleliteralstrong{\sphinxupquote{X}} (\sphinxstyleliteralemphasis{\sphinxupquote{array\sphinxhyphen{}like}}) \textendash{} Predictor of shape (\sphinxtitleref{n\_samples}, \sphinxtitleref{p\_features})
+
+\item {} 
+\sphinxAtStartPar
+\sphinxstyleliteralstrong{\sphinxupquote{Y}} (\sphinxstyleliteralemphasis{\sphinxupquote{array\sphinxhyphen{}like}}) \textendash{} Response of shape (\sphinxtitleref{n\_samples}, \sphinxtitleref{r\_features})
+
+\item {} 
+\sphinxAtStartPar
+\sphinxstyleliteralstrong{\sphinxupquote{q}} (\sphinxstyleliteralemphasis{\sphinxupquote{int}}) \textendash{} Value between \sphinxtitleref{1} and \sphinxtitleref{p\_features}. The number of projections used.
+
+\item {} 
+\sphinxAtStartPar
+\sphinxstyleliteralstrong{\sphinxupquote{version}} (\sphinxstyleliteralemphasis{\sphinxupquote{str}}) \textendash{} either ‘sample’ or ‘population’, defaults to ‘sample’
 
 \end{itemize}
+
+\sphinxlineitem{Returns}
+\sphinxAtStartPar
+Nothing.
+
+\end{description}\end{quote}
+
+\end{fulllineitems}
+
+\index{transform() (in module NIPALS.nipals.nipals)@\spxentry{transform()}\spxextra{in module NIPALS.nipals.nipals}}
+
+\begin{fulllineitems}
+\phantomsection\label{\detokenize{NIPALS:NIPALS.nipals.nipals.transform}}
+\pysigstartsignatures
+\pysiglinewithargsret{\sphinxcode{\sphinxupquote{NIPALS.nipals.nipals.}}\sphinxbfcode{\sphinxupquote{transform}}}{\sphinxparam{\DUrole{n,n}{self}}, \sphinxparam{\DUrole{n,n}{X}}}{}
+\pysigstopsignatures
+\sphinxAtStartPar
+Transform data using the NIPALS algorithm. Must run {\hyperref[\detokenize{NIPALS:NIPALS.nipals.nipals.fit}]{\sphinxcrossref{\sphinxcode{\sphinxupquote{NIPALS.nipals.nipals.fit()}}}}} before running this function.
+\begin{quote}\begin{description}
+\sphinxlineitem{Parameters}
+\sphinxAtStartPar
+\sphinxstyleliteralstrong{\sphinxupquote{X}} (\sphinxstyleliteralemphasis{\sphinxupquote{array\sphinxhyphen{}like}}) \textendash{} Predictor of shape (\sphinxtitleref{n\_samples}, \sphinxtitleref{p\_features})
+
+\sphinxlineitem{Returns}
+\sphinxAtStartPar
+The \(W\) and \(\beta\) transformed data, respectively.
+
+\sphinxlineitem{Return type}
+\sphinxAtStartPar
+tuple(array\sphinxhyphen{}like, array\sphinxhyphen{}like)
+
+\end{description}\end{quote}
+
+\end{fulllineitems}
+
 
 
 

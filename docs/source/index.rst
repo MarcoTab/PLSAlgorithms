@@ -13,8 +13,3 @@ Welcome to PLSLib's documentation!
    NIPALS
 
 
-
-Indices and tables
-==================
-
-* :ref:`search`
