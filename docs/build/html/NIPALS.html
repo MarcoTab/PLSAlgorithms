@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 
 <html lang="en">
@@ -12,6 +11,7 @@
     <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
     <script src="_static/doctools.js"></script>
     <script src="_static/sphinx_highlight.js"></script>
+    <script async="async" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
     <link rel="prev" title="Welcome to PLSLib’s documentation!" href="index.html" />
@@ -34,6 +34,17 @@
   <section id="nipals">
 <h1>NIPALS<a class="headerlink" href="#nipals" title="Permalink to this heading">¶</a></h1>
 <p>Nonlinear iterative partial least squares [REFERENCE HERE].</p>
+<dl class="py function">
+<dt class="sig sig-object py" id="NIPALS.nipals.nipals">
+<span class="sig-prename descclassname"><span class="pre">NIPALS.nipals.</span></span><span class="sig-name descname"><span class="pre">nipals</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">someotherinputsidontknowyet</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">version</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'sample'</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#NIPALS.nipals.nipals" title="Permalink to this definition">¶</a></dt>
+<dd><p>Orthogonal weights: <span class="math notranslate nohighlight">\(W^T_q W_q = I_q\)</span></p>
+<p>Envelope connection: <span class="math notranslate nohighlight">\(\mathrm{span}(Wq) = \mathcal{E}_{Σ_X}(\mathcal{B})\)</span>, the <span class="math notranslate nohighlight">\(Σ_X\)</span>-envelope of <span class="math notranslate nohighlight">\(\mathcal{B} \mathrel{\vcenter{:}}= \mathrm{span}(\beta)\)</span>.</p>
+<p>Score matrix <span class="math notranslate nohighlight">\(S_d\)</span>: These are traditional computational intermediaries,
+although they are not needed in the computation of <span class="math notranslate nohighlight">\(\hat{\beta}_{\mathrm{npls}}\)</span>.</p>
+<p>Algorithm <span class="math notranslate nohighlight">\(\mathbb{N}\)</span>: This is an instance of Algorithm N discussed in §1.5.3.
+PLS1 v. PLS2 Algorithm is applicable for PLS1 or PLS2 fits; See §3.8.</p>
+</dd></dl>
+
 </section>
 
 
@@ -54,7 +65,10 @@
 
 <h3>Navigation</h3>
 <ul class="current">
-<li class="toctree-l1 current"><a class="current reference internal" href="#">NIPALS</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">NIPALS</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#NIPALS.nipals.nipals"><code class="docutils literal notranslate"><span class="pre">nipals()</span></code></a></li>
+</ul>
+</li>
 </ul>
 
 <div class="relations">
@@ -91,7 +105,7 @@
       &copy;2023, Marco Tabacman.
       
       |
-      Powered by <a href="http://sphinx-doc.org/">Sphinx 6.2.1</a>
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 7.0.0</a>
       &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.13</a>
       
       |
