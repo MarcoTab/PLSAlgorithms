@@ -83,30 +83,43 @@ class nipals:
                 curY = curY - (scores @ yloads.T)
 
                 # Concatenate onto matrices
-                np.concatenate((self.W, weights), axis=1)
-                np.concatenate((xloadsmat, xloads), axis=1)
-                np.concatenate((yloadsmat, yloads), axis=1)
-                np.concatenate((scoresmat, scores), axis=1)
+                self.W = np.concatenate((self.W, weights), axis=1)
+                xloadsmat = np.concatenate((xloadsmat, xloads), axis=1)
+                yloadsmat = np.concatenate((yloadsmat, yloads), axis=1)
+                scoresmat = np.concatenate((scoresmat, scores), axis=1)
 
-            # Compute regession coefficients
+            # Compute regression coefficients
             self.beta = self.W @ np.linalg.inv(xloadsmat.T @ self.W) @ yloadsmat.T
 
         else:
             ...
-            # XY_cov = np.cov(X.T @ Y)
-            # _, eigvecs = np.linalg.eigh(XY_cov @ XY_cov.T)
-            # w = eigvecs[-1]
-            # self.W = w
+            XY_cov = np.cov(X.T @ Y)
+            _, eigvecs = np.linalg.eigh(XY_cov @ XY_cov.T)
+            weights = eigvecs[::-1][0]
+            self.W = weights
+            X_cov = np.cov(X)
 
-            # for d in range(self.q):
-            #     # Stopping condition
-            #     if (True): # TODO Replace with actual condition. What is Q???
-            #         self.q = d
-            #         break
+            for d in range(self.q):
                 
-            #     # 
 
+                P = self.W @ np.linalg.inv(self.W.T @ X_cov @ self.W) @ self.W.T @ X_cov
 
+                Q = np.eye(P.shape[0], P.shape[1]) - P
+
+                # Stopping condition
+                if (np.abs(Q.T @ XY_cov) <= 1e-10):
+                    self.q = d
+                    break
+                
+                # Compute weights
+                _, eigvecs = np.linalg.eigh(Q.T @ XY_cov @ XY_cov.T @ Q)
+                weights = eigvecs[::-1][0]
+                
+                # Append
+                self.W = np.concatenate((self.W, weights), axis=1)
+
+            # Compute regression coefficients
+            self.beta = self.W @ np.linalg.inv(self.W.T @ X_cov @ self.W) @ self.W.T @ XY_cov
 
 
     def transform(self, X):
@@ -123,5 +136,4 @@ class nipals:
             raise Exception("You must run `fit` before running this function.")
         
         return self.W.T @ X, self.beta.T @ X
-        ...
 
