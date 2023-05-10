@@ -8,3 +8,4 @@ doctrees/
 _templates/
 __pycache__/
 mvc1_data/
+test.py

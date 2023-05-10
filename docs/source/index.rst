@@ -5,7 +5,7 @@
 
 Welcome to PLSLib's documentation!
 ==================================
-**PLSLib** is a Python and R library implementing the various algorithms detailed in the book *Partial LeastSquares Regression and Related Dimension Reduction Methods* by R. Dennis Cook and Liliana Forzani, available `here <about:blank>`_.
+**PLSLib** is a Python and R library implementing the various algorithms detailed in the book *Partial Least Squares Regression and Related Dimension Reduction Methods* by R. Dennis Cook and Liliana Forzani, available `here <about:blank>`_.
 
 .. toctree::
    :maxdepth: 2
