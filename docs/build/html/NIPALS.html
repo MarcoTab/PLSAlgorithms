@@ -35,10 +35,10 @@
 <h1>NIPALS<a class="headerlink" href="#nipals" title="Permalink to this heading">¶</a></h1>
 <p>Nonlinear Iterative Partial Least Squares [REFERENCE HERE].</p>
 <dl class="py class">
-<dt class="sig sig-object py" id="NIPALS.nipals.nipals">
-<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">NIPALS.nipals.</span></span><span class="sig-name descname"><span class="pre">nipals</span></span><a class="headerlink" href="#NIPALS.nipals.nipals" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="PLSLib.nipals.nipals">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">PLSLib.nipals.</span></span><span class="sig-name descname"><span class="pre">nipals</span></span><a class="headerlink" href="#PLSLib.nipals.nipals" title="Permalink to this definition">¶</a></dt>
 <dd><p>Orthogonal weights: <span class="math notranslate nohighlight">\(W^T_q W_q = I_q\)</span></p>
-<p>Envelope connection: <span class="math notranslate nohighlight">\(\mathrm{span}(W_q) = \mathcal{E}_{\Sigma_X}(\mathcal{B})\)</span>, the <span class="math notranslate nohighlight">\(\Sigma_X\)</span>-envelope of <span class="math notranslate nohighlight">\(\mathcal{B} \mathrel{\vcenter{:}}= \mathrm{span}(\beta)\)</span>.</p>
+<p>Envelope connection: <span class="math notranslate nohighlight">\(\mathrm{span}(W_q)=\mathcal{E}_{\Sigma_X}(\mathcal{B})\)</span>, the <span class="math notranslate nohighlight">\(\Sigma_X\)</span>-envelope of <span class="math notranslate nohighlight">\(\mathcal{B}\mathrel{\vcenter{:}}=\mathrm{span}(\beta)\)</span>.</p>
 <p>Score matrix <span class="math notranslate nohighlight">\(S_d\)</span>: These are traditional computational intermediaries,
 although they are not needed in the computation of <span class="math notranslate nohighlight">\(\hat{\beta}_{\mathrm{npls}}\)</span>.</p>
 <p>Algorithm <span class="math notranslate nohighlight">\(\mathbb{N}\)</span>: This is an instance of Algorithm <span class="math notranslate nohighlight">\(\mathbb{N}\)</span> discussed in §1.5.3.</p>
@@ -46,8 +46,8 @@ although they are not needed in the computation of <span class="math notranslate
 </dd></dl>
 
 <dl class="py function">
-<dt class="sig sig-object py" id="NIPALS.nipals.nipals.fit">
-<span class="sig-prename descclassname"><span class="pre">NIPALS.nipals.nipals.</span></span><span class="sig-name descname"><span class="pre">fit</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">X</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">Y</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">q</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">version</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'sample'</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#NIPALS.nipals.nipals.fit" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="PLSLib.nipals.nipals.fit">
+<span class="sig-prename descclassname"><span class="pre">PLSLib.nipals.nipals.</span></span><span class="sig-name descname"><span class="pre">fit</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">X</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">Y</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">q</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">version</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'sample'</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#PLSLib.nipals.nipals.fit" title="Permalink to this definition">¶</a></dt>
 <dd><p>Fit this model to the training data <cite>X</cite>, <cite>Y</cite> using <cite>q</cite> dimensions.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
@@ -65,9 +65,9 @@ although they are not needed in the computation of <span class="math notranslate
 </dd></dl>
 
 <dl class="py function">
-<dt class="sig sig-object py" id="NIPALS.nipals.nipals.transform">
-<span class="sig-prename descclassname"><span class="pre">NIPALS.nipals.nipals.</span></span><span class="sig-name descname"><span class="pre">transform</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">X</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#NIPALS.nipals.nipals.transform" title="Permalink to this definition">¶</a></dt>
-<dd><p>Transform data using the NIPALS algorithm. Must run <a class="reference internal" href="#NIPALS.nipals.nipals.fit" title="NIPALS.nipals.nipals.fit"><code class="xref py py-meth docutils literal notranslate"><span class="pre">NIPALS.nipals.nipals.fit()</span></code></a> before running this function.</p>
+<dt class="sig sig-object py" id="PLSLib.nipals.nipals.transform">
+<span class="sig-prename descclassname"><span class="pre">PLSLib.nipals.nipals.</span></span><span class="sig-name descname"><span class="pre">transform</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">X</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#PLSLib.nipals.nipals.transform" title="Permalink to this definition">¶</a></dt>
+<dd><p>Transform data using the NIPALS algorithm. Must run <code class="xref py py-meth docutils literal notranslate"><span class="pre">NIPALS.nipals.nipals.fit()</span></code> before running this function.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><p><strong>X</strong> (<em>array-like</em>) – Predictor of shape (<cite>n_samples</cite>, <cite>p_features</cite>)</p>
@@ -77,6 +77,20 @@ although they are not needed in the computation of <span class="math notranslate
 </dd>
 <dt class="field-odd">Return type<span class="colon">:</span></dt>
 <dd class="field-odd"><p>tuple(array-like, array-like)</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="PLSLib.nipals.nipals.get_transformers">
+<span class="sig-prename descclassname"><span class="pre">PLSLib.nipals.nipals.</span></span><span class="sig-name descname"><span class="pre">get_transformers</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#PLSLib.nipals.nipals.get_transformers" title="Permalink to this definition">¶</a></dt>
+<dd><p>Gets the matrices used to transform the data. Must run <code class="xref py py-meth docutils literal notranslate"><span class="pre">NIPALS.nipals.nipals.fit()</span></code> before running this function.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>The <span class="math notranslate nohighlight">\(W\)</span> and <span class="math notranslate nohighlight">\(\beta\)</span> transformed data, respectively.</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>tuple(array-like, array-like)</p>
 </dd>
 </dl>
 </dd></dl>
@@ -102,9 +116,10 @@ although they are not needed in the computation of <span class="math notranslate
 <h3>Navigation</h3>
 <ul class="current">
 <li class="toctree-l1 current"><a class="current reference internal" href="#">NIPALS</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="#NIPALS.nipals.nipals"><code class="docutils literal notranslate"><span class="pre">nipals</span></code></a></li>
-<li class="toctree-l2"><a class="reference internal" href="#NIPALS.nipals.nipals.fit"><code class="docutils literal notranslate"><span class="pre">fit()</span></code></a></li>
-<li class="toctree-l2"><a class="reference internal" href="#NIPALS.nipals.nipals.transform"><code class="docutils literal notranslate"><span class="pre">transform()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="#PLSLib.nipals.nipals"><code class="docutils literal notranslate"><span class="pre">nipals</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="#PLSLib.nipals.nipals.fit"><code class="docutils literal notranslate"><span class="pre">fit()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="#PLSLib.nipals.nipals.transform"><code class="docutils literal notranslate"><span class="pre">transform()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="#PLSLib.nipals.nipals.get_transformers"><code class="docutils literal notranslate"><span class="pre">get_transformers()</span></code></a></li>
 </ul>
 </li>
 </ul>
