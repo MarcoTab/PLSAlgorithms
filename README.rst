@@ -17,8 +17,8 @@ R
 Documentation 
 -------------
 
-HTML
-~~~~
+HTML (Recommended)
+~~~~~~~~~~~~~~~~~~
 Copy the total path for `docs/build/html/index.html` and copy it into a web browser of your choice. 
 
 LaTeX
