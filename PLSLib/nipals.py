@@ -35,27 +35,30 @@ class nipals:
             :type Y: array-like
             :param q: Value between `1` and `p_features`. The number of projections used.
             :type q: int
-            :param version: either 'sample' or 'population', defaults to 'sample'
+            :param version: either 'sample' or 'population'. Defaults to 'sample'
             :type version: str
             :return: Nothing.
         """ 
-        if (version != 'sample' or version != 'population'):
+        if (version != 'sample' and version != 'population'):
             raise ValueError(f"version must be 'sample' or 'population', not {version}.")
         
         if (len(X.shape) != 2 or len(Y.shape) != 2):
             raise ValueError(f"X and Y must be 2 dimensional array-like. Current dimensions: {len(X.shape)} and {len(Y.shape)}.")
         
         if (X.shape[0] != Y.shape[0]):
-            raise ValueError(f"X and Y must have the same first dimension. Current shapes: {X.shape} and {Y.shape}.")
+            raise ValueError(f"X and Y must represent the same amount of data. Current number of datapoints: {X.shape[0]} and {Y.shape[0]}.")
         
         self.q = int(q)
 
-        if (self.q < 1 or self.q > X.shape[1]):
-            raise ValueError(f"q should be 1 and X's second dimension. Currently {q} and {X.shape[1]}.")
+        if (self.q < 1 or self.q > X.shape[0]):
+            raise ValueError(f"q should be between 1 and the number of features in X. Currently {q} and {X.shape[1]}.")
         
 
-        self.xmean = np.mean(X, axis=0)
-        self.ymean = np.mean(Y, axis=0)
+        self.xmean = np.atleast_2d(np.mean(X, axis=0))
+        self.ymean = np.atleast_2d(np.mean(Y, axis=0))
+
+        X = X - self.xmean
+        Y = Y - self.ymean
 
 
         if (version == 'sample'):
@@ -68,22 +71,22 @@ class nipals:
             xloads = None
             yloads = None
 
-            xloadsmat = np.zeros(0)
-            yloadsmat = np.zeros(0)
-            scoresmat = np.zeros(0)
-            self.W = np.zeros(0)
+            xloadsmat = None
+            yloadsmat = None
+            scoresmat = None
+            self.W = None
 
-            for _ in range(self.q):
+            for d in range(self.q):
                 # Compute sample covariance matrix
                 sample_cov = (1/n) * curX.T @ curY
-                
-                # Get eigenvectors
-                _, evecs = np.linalg.eigh(sample_cov)
-                # largest normalized eigenvector is the weight
-                weights = evecs[::-1][:, 0]
 
+                # Get eigenvectors
+                _, evecs = np.linalg.eigh(sample_cov @ sample_cov.T)
+                # largest normalized eigenvector is the weight
+                weights = np.atleast_2d(evecs[::-1][:, 0]).T
+                
                 # Compute scores
-                scores = curX @ weights
+                scores = (curX @ weights)
 
                 # Compute X and Y loadings
                 xloads = (curX.T @ scores) / (scores.T @ scores)
@@ -94,10 +97,16 @@ class nipals:
                 curY = curY - (scores @ yloads.T)
 
                 # Concatenate onto matrices
-                self.W = np.concatenate((self.W, weights), axis=1)
-                xloadsmat = np.concatenate((xloadsmat, xloads), axis=1)
-                yloadsmat = np.concatenate((yloadsmat, yloads), axis=1)
-                scoresmat = np.concatenate((scoresmat, scores), axis=1)
+                if (xloadsmat is None and yloadsmat is None and scoresmat is None and self.W is None):
+                    self.W = weights
+                    xloadsmat = xloads
+                    yloadsmat = yloads
+                    scoresmat = scores
+                else:
+                    self.W = np.concatenate((self.W, weights), axis=1)
+                    xloadsmat = np.concatenate((xloadsmat, xloads), axis=1)
+                    yloadsmat = np.concatenate((yloadsmat, yloads), axis=1)
+                    scoresmat = np.concatenate((scoresmat, scores), axis=1)
 
             # Compute regression coefficients
             self.beta = self.W @ np.linalg.inv(xloadsmat.T @ self.W) @ yloadsmat.T
@@ -134,10 +143,11 @@ class nipals:
 
     def transform(self, X):
         """
-            Transform data using the NIPALS algorithm. Must run :meth:`PLSLib.nipals.nipals.fit` before running this function.
+            Transform data using the NIPALS algorithm. Must run :meth:`PLSLib.nipals.nipals.fit` before running this function. Does not center data.
 
             :param X: Predictor of shape (`n_samples`, `p_features`)
             :type X: array-like
+            
             :return: The :math:`W` and :math:`\\beta` transformed data, respectively.
             :rtype: tuple(array-like, array-like)
         """
@@ -145,7 +155,6 @@ class nipals:
         if (self.q is None or self.W is None or self.beta is None):
             raise Exception("You must run `fit` before running this function.")
         
-        # TODO Fix projections
         return self.W.T @ X, self.beta.T @ X
     
     
@@ -161,4 +170,4 @@ class nipals:
             raise Exception("You must run `fit` before running this function.")
         
         return self.W, self.beta
-
+    
