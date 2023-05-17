@@ -4,10 +4,10 @@ library(glmnet)
 library(MASS)
 
 # Load in moisture in corn data
-ycal <- read.table("mvc1_data/Parameters in corn/y1cal.txt", quote="\"", comment.char="")
-ytest <- read.table("mvc1_data/Parameters in corn/y1test.txt", quote="\"", comment.char="")
-Xcal <-  read.table("mvc1_data/Parameters in corn/Xcal.txt", quote="\"", comment.char="")
-Xtest <- read.table("mvc1_data/Parameters in corn/Xtest.txt", quote="\"", comment.char="")
+ycal <- read.table("data/chapter 1/Parameters in corn/y1cal.txt", quote="\"", comment.char="")
+ytest <- read.table("data/chapter 1/Parameters in corn/y1test.txt", quote="\"", comment.char="")
+Xcal <-  read.table("data/chapter 1/Parameters in corn/Xcal.txt", quote="\"", comment.char="")
+Xtest <- read.table("data/chapter 1/Parameters in corn/Xtest.txt", quote="\"", comment.char="")
 x=t(Xcal)
 xx=t(Xtest)
 y=ycal$V1
@@ -38,10 +38,10 @@ plot(ytest,pred_pls,xlab="Observed response, Y",ylab="Predicted response")
 
 
 # Load in protein in meat data
-ycal <- read.table("mvc1_data/Parameters in meat/y3cal.txt", quote="\"", comment.char="")
-ytest <- read.table("mvc1_data/Parameters in meat/y3test.txt", quote="\"", comment.char="")
-Xcal <-  read.table("mvc1_data/Parameters in meat/Xcal.txt", quote="\"", comment.char="")
-Xtest <- read.table("mvc1_data/Parameters in meat/Xtest.txt", quote="\"", comment.char="")
+ycal <- read.table("data/chapter 1/Parameters in meat/y3cal.txt", quote="\"", comment.char="")
+ytest <- read.table("data/chapter 1/Parameters in meat/y3test.txt", quote="\"", comment.char="")
+Xcal <-  read.table("data/chapter 1/Parameters in meat/Xcal.txt", quote="\"", comment.char="")
+Xtest <- read.table("data/chapter 1/Parameters in meat/Xtest.txt", quote="\"", comment.char="")
 x=t(Xcal)
 xx=t(Xtest)
 y=ycal$V1
@@ -73,10 +73,10 @@ plot(ytest,pred_pls,xlab="Observed response, Y",ylab="Predicted response")
 
 
 # Load in tetracycline data
-ycal <- read.table("mvc1_data/Tetracycline in serum/ycal.txt", quote="\"", comment.char="")
-ytest <- read.table("mvc1_data/Tetracycline in serum/ytest.txt", quote="\"", comment.char="")
-Xcal <-  read.table("mvc1_data/Tetracycline in serum/Xcal.txt", quote="\"", comment.char="")
-Xtest <- read.table("mvc1_data/Tetracycline in serum/Xtest.txt", quote="\"", comment.char="")
+ycal <- read.table("data/chapter 1/Tetracycline in serum/ycal.txt", quote="\"", comment.char="")
+ytest <- read.table("data/chapter 1/Tetracycline in serum/ytest.txt", quote="\"", comment.char="")
+Xcal <-  read.table("data/chapter 1/Tetracycline in serum/Xcal.txt", quote="\"", comment.char="")
+Xtest <- read.table("data/chapter 1/Tetracycline in serum/Xtest.txt", quote="\"", comment.char="")
 x=t(Xcal)
 xx=t(Xtest)
 y=ycal$V1

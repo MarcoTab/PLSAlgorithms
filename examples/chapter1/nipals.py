@@ -10,13 +10,13 @@ from sklearn.model_selection import cross_val_score
 import matplotlib.pyplot as plt
 
 # Read in corn data
-X_train = np.genfromtxt('mvc1_data/Parameters in corn/Xcal.txt', delimiter="  ")
+X_train = np.genfromtxt('data/chapter 1/Parameters in corn/Xcal.txt', delimiter="  ")
 X_train = X_train.T
-Y_train = np.genfromtxt('mvc1_data/Parameters in corn/y1cal.txt', delimiter="  ")
+Y_train = np.genfromtxt('data/chapter 1/Parameters in corn/y1cal.txt', delimiter="  ")
 
-X_test = np.genfromtxt('mvc1_data/Parameters in corn/Xtest.txt', delimiter="  ")
+X_test = np.genfromtxt('data/chapter 1/Parameters in corn/Xtest.txt', delimiter="  ")
 X_test = X_test.T
-Y_test = np.genfromtxt('mvc1_data/Parameters in corn/y1test.txt', delimiter="  ")
+Y_test = np.genfromtxt('data/chapter 1/Parameters in corn/y1test.txt', delimiter="  ")
 
 scores = []
 stds = []
@@ -57,13 +57,13 @@ plt.show()
 
 
 # Read in meat data
-X_train = np.genfromtxt('mvc1_data/Parameters in meat/Xcal.txt', delimiter="  ")
+X_train = np.genfromtxt('data/chapter 1/Parameters in meat/Xcal.txt', delimiter="  ")
 X_train = X_train.T
-Y_train = np.genfromtxt('mvc1_data/Parameters in meat/y3cal.txt', delimiter="  ")
+Y_train = np.genfromtxt('data/chapter 1/Parameters in meat/y3cal.txt', delimiter="  ")
 
-X_test = np.genfromtxt('mvc1_data/Parameters in meat/Xtest.txt', delimiter="  ")
+X_test = np.genfromtxt('data/chapter 1/Parameters in meat/Xtest.txt', delimiter="  ")
 X_test = X_test.T
-Y_test = np.genfromtxt('mvc1_data/Parameters in meat/y3test.txt', delimiter="  ")
+Y_test = np.genfromtxt('data/chapter 1/Parameters in meat/y3test.txt', delimiter="  ")
 
 scores = []
 stds = []
@@ -106,13 +106,13 @@ plt.show()
 
 
 # Read in Tetracycline data
-X_train = np.genfromtxt('mvc1_data/Tetracycline in serum/Xcal.txt', delimiter="  ")
+X_train = np.genfromtxt('data/chapter 1/Tetracycline in serum/Xcal.txt', delimiter="  ")
 X_train = X_train.T
-Y_train = np.genfromtxt('mvc1_data/Tetracycline in serum/ycal.txt', delimiter="  ")
+Y_train = np.genfromtxt('data/chapter 1/Tetracycline in serum/ycal.txt', delimiter="  ")
 
-X_test = np.genfromtxt('mvc1_data/Tetracycline in serum/Xtest.txt', delimiter="  ")
+X_test = np.genfromtxt('data/chapter 1/Tetracycline in serum/Xtest.txt', delimiter="  ")
 X_test = X_test.T
-Y_test = np.genfromtxt('mvc1_data/Tetracycline in serum/ytest.txt', delimiter="  ")
+Y_test = np.genfromtxt('data/chapter 1/Tetracycline in serum/ytest.txt', delimiter="  ")
 
 scores = []
 stds = []
