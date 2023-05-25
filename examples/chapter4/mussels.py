@@ -14,7 +14,7 @@ from tabulate import tabulate
 import scipy as sp
 
 # Read in mussel data
-df = pd.read_csv('data/chapter4/Mussel/musselslogMinus3.txt', sep=" ", header=0)
+df = pd.read_csv('data/chapter4/musselslogMinus3.txt', sep=" ", header=0)
 Y = df["logM"].to_numpy().reshape(-1, 1)
 X = df.drop("logM", axis=1).to_numpy()
 

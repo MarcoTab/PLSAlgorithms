@@ -81,6 +81,7 @@ qq = [0,0,0,0]
 
 yeast = dict()
 
+print("Simulating", end='', flush=True)
 for i in range(len(JJ)):
     p = JJ[i]
 
@@ -96,7 +97,7 @@ for i in range(len(JJ)):
         q = qq[jj]
 
         for hh in range(nreps):
-           
+            print("." if (hh+1) % 4 != 0 else "\b\b\b   \b\b\b", end="", flush=True)
             if (q != p):
                 H1 = np.random.multivariate_normal(mean=[0]*n, cov=25*np.eye(n), size=1)[0,:]
                 H2 = np.random.multivariate_normal(mean=[0]*n, cov=25*np.eye(n), size=1)[0,:]
@@ -167,6 +168,7 @@ for i in range(len(JJ)):
 
             PLSS[hh,i,jj] = ((beta_true - A1.coef_).T @ np.cov(yeast['X'], ddof=1, rowvar=False) @ (beta_true - A1.coef_)).item()
 
+print()
 
 H = np.zeros((len(JJ), len(qq)))
 
