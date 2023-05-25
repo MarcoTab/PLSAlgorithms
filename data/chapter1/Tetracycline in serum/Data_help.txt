@@ -1,0 +1,34 @@
+Determination of tetracycline in serum
+--------------------------------------------------------------------------------------
+File name				Content
+--------------------------------------------------------------------------------------
+Xcal.txt 				Calibration spectra in matrix form
+Xtest.txt 				Test spectra in matrix form
+ycal.txt				Calibration concentrations for analyte
+ytest.txt				Test concentrations for analyte
+
+--------------------------------------------------------------------------------------
+Spectral regions: 40 100
+Data type: matrix
+Other: use 6 PLS-1 factors
+--------------------------------------------------------------------------------------
+FOR MORE DETAILS PLEASE REFER TO:
+Enhanced synchronous spectrofluorometric determination 
+of tetracycline in blood serum by chemometric analysis. 
+Comparison of partial least-squares and hybrid linear 
+Analysis calibrations, Goicoechea, HC y Olivieri, AC, 
+Anal. Chem. 19, 4361 (1999).
+--------------------------------------------------------------------------------------
+
+
+
+For y 
+
+PLS: 4 components
+LASSO no 0 = 10
+
+OUT OF SAMPLE (error^2)
+PLS=   0.004960326LASSO=  0.01015426OLS= 1.365295
+
+IN SAMPLE
+PLS= ] 0.01420794LASSO=  0.01736953OLS= 7.040383e-25

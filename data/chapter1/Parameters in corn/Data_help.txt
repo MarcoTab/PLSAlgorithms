@@ -1,0 +1,75 @@
+This data set consists of 80 samples of corn measured 
+on a NIR spectrometer. 
+The wavelength range is 1100-2498nm at 2 nm intervals 
+(700 channels). 
+The moisture, oil, protein and starch values for each 
+of the samples is also included. 
+
+The set was randomly divided into calibration (50 samples)
+and monitoring (30 samples):
+
+Xcal.txt	Calibration matrix
+y1cal.txt	Calibration moisture values
+y2cal.txt	Calibration oil values
+y3cal.txt	Calibration protein values
+y4cal.txt	Calibration starch values
+ycal.txt	Calibration all four parameters
+
+idem Xtest, y1test, y2test, y3test, y4test, ytest
+
+
+For each components (latter I will do jointly)
+
+ 
+
+
+For y1
+
+PLS: 9 components
+LASSO no 0 = 21
+
+OUT OF SAMPLE (error^2)
+PLS=  0.0004104808LASSO 0.01298456OLS= 42.46308
+
+IN SAMPLE
+PLS=0.0002476188LASSO= 0.008823338OLS= 2.994759e-06
+
+
+
+For y2
+
+PLS: 9 components
+LASSO no 0 = 27
+
+OUT OF SAMPLE (error^2)
+PLS=  0.007094513LASSO 0.007967773OLS= 16.914
+
+IN SAMPLE
+PLS=0.002125748LASSO= 0.004799309OLS= 2.232437e-05
+
+
+
+For y3
+
+PLS: 9 components
+LASSO no 0 = 26
+
+OUT OF SAMPLE (error^2)
+PLS=   0.02055924LASSO 0.03831648OLS= 108.3696
+
+IN SAMPLE
+PLS=0.008909568LASSO=  0.01688OLS=  0.0001355604
+
+
+
+
+For y4
+
+PLS: 9 components
+LASSO no 0 = 36
+
+OUT OF SAMPLE (error^2)
+PLS=   0.05388008LASSO 0.1649143OLS=  430.8345
+
+IN SAMPLE
+PLS=0.04193043LASSO=  0.09114358OLS=  0.0003696791

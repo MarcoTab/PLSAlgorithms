@@ -1,0 +1,57 @@
+Tecator data set
+NIR spectra of meat samples
+
+Xcal.txt	Calibration matrix of 170 samples
+Xtest.txt	Test matrix of 70 samples
+y1cal.txt	Calibration fat values
+y1test.txt	Test fat values
+y2cal.txt	Calibration moisture values
+y2test.txt	Test moisture values
+y3cal.txt	Calibration protein values
+y3test.txt	Test protein values
+
+
+
+Separately PLS for now (same LASSO and OLS) 
+SOME NON-LINEARITY
+
+
+
+For y1
+
+PLS: 13 components
+LASSO no 0 = 29
+
+OUT OF SAMPLE (error^2)
+PLS=  7.239363LASSO=  9.810233OLS= 128.5224
+
+IN SAMPLE
+PLS= ] 4.047028LASSO= 8.242736OLS= 5.075204
+
+
+
+
+for y2
+
+PLS: 14 components
+LASSO no 0 = 12
+
+OUT OF SAMPLE (error^2)
+PLS=  7.476707LASSO=  18.13065OLS= 146.5194
+
+IN SAMPLE
+PLS= ] 4.610367LASSO= 13.50447OLS= 7.262997
+
+
+
+
+for y3
+
+PLS: 13 components
+LASSO no 0 = 19
+
+OUT OF SAMPLE (error^2)
+PLS=  0.6198631LASSO=  1.517609OLS= 9.535407
+
+IN SAMPLE
+PLS= ] 0.4498597LASSO= 1.255185OLS= 0.49725
