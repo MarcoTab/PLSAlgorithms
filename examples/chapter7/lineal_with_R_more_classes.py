@@ -11,8 +11,6 @@ def lineal_junto_small_R_more_classes(Xes, y, K, d, loocv=False):
     p_pfc = np.empty_like(y.reshape(-1,1))
     # d should be smaller than the number of samples
 
-    cv_predictions = []
-
     n = Xes.shape[0]
 
     # Generate random samples

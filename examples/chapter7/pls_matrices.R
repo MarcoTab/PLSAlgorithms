@@ -6,7 +6,7 @@ library(matrixcalc)
 ### Returns all of the and also returns the estimated A, S and pls beta.
 
 # Given a positive semi-definite matrix and a vector, finds the orthogonal projection wrt the dot product generated with that matrix
-proy_ort<-function(M,v){
+orth_proj<-function(M,v){
     m=dim(M)[1]
     #if (!is.positive.semi.definite(M)) stop("error M is not definite semi-positive ")
     #if (dim(v)[1]!=dim(M)[1]) stop("error M no es positiva definida")
@@ -25,7 +25,7 @@ pls_matrices<-function(A, S, d){
    V[,1]=eigen(A)$vectors[,1]
    if (d>1){
      for (i in 2:d){
-                  aux=proy_ort(S,V[,(1:(i-1))])
+                  aux=orth_proj(S,V[,(1:(i-1))])
                    V[,i]=eigen(t(aux)%*%A%*%aux,symmetric=TRUE)$vectors[,1]
      }
    }

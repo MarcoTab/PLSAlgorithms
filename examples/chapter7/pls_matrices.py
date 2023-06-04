@@ -1,15 +1,15 @@
 import numpy as np
 
 def is_psd(A):
-    np.all(np.linalg.eigvals(A) >= 0)
+    return np.all(np.linalg.eigvals(A) >= 0)
 
-# Given a positive semi-definite matrix and a vector, finds the orthogonal projection wrt the dot product generated with that matrix
+# Given a positive definite matrix and a vector, finds the orthogonal projection wrt the dot product generated with that matrix
 def orth_proj(M, v):
     if not is_psd(M):
         raise ValueError("M must be positive semi-definite")
     
     m = M.shape[0]
-    return np.eye(m) - v @ np.linalg.solve(v.T @ M @ v) @ v.T @ M
+    return np.eye(m) - v @ np.linalg.inv(v.T @ M @ v) @ v.T @ M
 
 # Given positive semi-definite matrices A and S, calculates the d first PLS projections.
 # A is Sigma_xy sigma_y^-1 Sigma_xy
@@ -42,5 +42,5 @@ def pls_matrices(A, S, d):
         'Gamma':V,
         'Omega':(V.T @ A @ V),
         'Atilde': V @ V.T @ A @ V @ V.T,
-        'beta': V @ np.linalg.solve(V.T @ S @ V) @ V.T @ A
+        'beta': V @ np.linalg.inv(V.T @ S @ V) @ V.T @ A
     }
