@@ -85,7 +85,7 @@ for this_aux in table_lines:
     # env_predict = np.empty((n, mm))
     # MSE_EPLS = np.empty((n, mm))
 
-    progbar = ChargingBar(f"Row {index+1}", max=mm*n, suffix="%(percent)d%%: %(index)d / %(max)d")
+    progbar = ChargingBar(f"Row {index+1}", max=mm*n, suffix="%(percent)d%%: %(index)d / %(max)d | ~%(eta)ds")
 
     for d in range(mm):
         for i in range(n):
