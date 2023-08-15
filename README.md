@@ -4,6 +4,15 @@
 
 ## Usage
 
+### Download the Files
+To download the files, either download the ZIP file by clicking on the green \<\>code button: ![image](https://github.com/MarcoTab/PLSLib/assets/64563061/0f69178c-fd4c-4c31-b42d-cd411ed09788)
+
+Or use git to clone the repository to your local: 
+- cd into the directory where you want to put the scripts
+- run `git clone https://github.com/MarcoTab/PLSLib.git`
+- the scripts will be stored in a directory called PLSLib.
+
+
 ### Python
 * Python must be version 3.8 or newer.
 * Install all required packages using the provided file in the top level directory: `pip3 install -r requirements.txt`.
