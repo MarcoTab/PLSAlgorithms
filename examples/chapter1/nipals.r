@@ -12,7 +12,7 @@ x=t(Xcal)
 xx=t(Xtest)
 y=ycal$V1
 
-# Cross validate for moisture in corn data
+# Cross validate for moisture in corn data in the training data
 pls_fit = plsr(y~x, scale = FALSE, validation = "CV", segment.type="consecutive")
 summary(pls_fit)
 
@@ -22,6 +22,8 @@ best_ncomp <- which.min(pls_fit$validation$adj)
 # Train model on best ncomps
 gas <- plsr(y~x, ncomp=best_ncomp)
 
+
+# Predicting in the test data
 new=data.frame(x=xx)
 new=t(data.frame(x=Xtest))
 # Predict using best model
@@ -30,10 +32,8 @@ pred_pls=p
 
 ytest=ytest$V1
 
-# Plot predicted vs observed responses regarding moisture in corn
+# Plot predicted vs observed responses regarding moisture in corn for PLS (part of Plot 1.1)
 plot(ytest,pred_pls,xlab="Observed response, Y",ylab="Predicted response")
-
-
 
 
 
@@ -65,7 +65,7 @@ pred_pls=p
 
 ytest=ytest$V1
 
-# Plot predicted vs observed responses regarding protein in meat
+# Plot predicted vs observed responses regarding protein in meat for PLS (part of Plot 1.1)
 plot(ytest,pred_pls,xlab="Observed response, Y",ylab="Predicted response")
 
 
@@ -100,7 +100,7 @@ pred_pls=p
 
 ytest=ytest$V1
 
-# Plot predicted vs observed responses regarding tetracycline in serum
+# Plot predicted vs observed responses regarding tetracycline in serum for PLS (part of Plot 1.1)
 plot(ytest,pred_pls,xlab="Observed response, Y",ylab="Predicted response")
 
 
