@@ -14,10 +14,13 @@ y=ycal$V1
 
 # Cross validate for moisture in corn data in the training data
 pls_fit = plsr(y~x, scale = FALSE, validation = "CV", segment.type="consecutive")
-summary(pls_fit)
 
 # Find best number of components to use acording to CV
 best_ncomp <- which.min(pls_fit$validation$adj)
+
+cat("Found best number of components to be ", best_ncomp, "\n")
+print(pls_fit$validation$adj)
+cat("\n")
 
 # Train model on best ncomps
 gas <- plsr(y~x, ncomp=best_ncomp)
@@ -33,7 +36,7 @@ pred_pls=p
 ytest=ytest$V1
 
 # Plot predicted vs observed responses regarding moisture in corn for PLS (part of Plot 1.1)
-plot(ytest,pred_pls,xlab="Observed response, Y",ylab="Predicted response")
+plot(ytest,pred_pls,xlab="Observed response, Y",ylab="Predicted response", main="Plot 1.1")
 
 
 
@@ -48,10 +51,13 @@ y=ycal$V1
 
 # Cross validate for protein in meat data
 pls_fit = plsr(y~x, scale = FALSE, validation = "CV", segment.type="consecutive")
-summary(pls_fit)
 
-# Find best number of components to use acording to CV
+# Find best number of components to use according to CV
 best_ncomp <- which.min(pls_fit$validation$adj)
+
+cat("Found best number of components to be ", best_ncomp, "\n")
+print(pls_fit$validation$adj)
+cat("\n")
 
 # Train model on best ncomps
 gas <- plsr(y~x, ncomp=best_ncomp)
@@ -65,8 +71,8 @@ pred_pls=p
 
 ytest=ytest$V1
 
-# Plot predicted vs observed responses regarding protein in meat for PLS (part of Plot 1.1)
-plot(ytest,pred_pls,xlab="Observed response, Y",ylab="Predicted response")
+# Plot predicted vs observed responses regarding protein in meat for PLS (part of Plot 1.2)
+plot(ytest,pred_pls,xlab="Observed response, Y",ylab="Predicted response", main="Plot 1.2")
 
 
 
@@ -83,10 +89,13 @@ y=ycal$V1
 
 # Cross validate for tetracycline in serum data
 pls_fit = plsr(y~x, scale = FALSE, validation = "CV", segment.type="consecutive")
-summary(pls_fit)
 
-# Find best number of components to use acording to CV
+# Find best number of components to use according to CV
 best_ncomp <- which.min(pls_fit$validation$adj)
+
+cat("Found best number of components to be ", best_ncomp, "\n")
+print(pls_fit$validation$adj)
+cat("\n")
 
 # Train model on best ncomps
 gas <- plsr(y~x, ncomp=best_ncomp)
@@ -100,7 +109,7 @@ pred_pls=p
 
 ytest=ytest$V1
 
-# Plot predicted vs observed responses regarding tetracycline in serum for PLS (part of Plot 1.1)
-plot(ytest,pred_pls,xlab="Observed response, Y",ylab="Predicted response")
+# Plot predicted vs observed responses regarding tetracycline in serum for PLS (part of Plot 1.3)
+plot(ytest,pred_pls,xlab="Observed response, Y",ylab="Predicted response", main="Plot 1.3")
 
 
