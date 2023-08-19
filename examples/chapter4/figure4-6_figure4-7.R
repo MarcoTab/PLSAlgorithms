@@ -69,6 +69,8 @@ gas5 <- plsr(ycal~X5, ncomp = 4,scale=TRUE)
 
 a_101=sqrt(mean((predict(gas5, ncomp = 4, newdata = (X5test))-ytest$V1)^2))
 
+
+# FIGURE 4.6
 plot(c(10,20, 33,50,101),xlab="p",c(a_10,a_15, a_33,a_50,a_101),type='b',ylab=TeX("$$\\sqrt{MSE}$$"), col="black", lwd=2, main="Figure 4.6")
 
 

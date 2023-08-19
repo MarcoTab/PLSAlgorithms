@@ -10,7 +10,7 @@ set.seed(10)
 
 
 ###############################
-#This is the script to reproduce Table 2 from the paper
+#This is the script to reproduce Table 4.4 (Chapter 4) from the paper
 #Asymptotic distribution of one-component partial least
 #squares regression estimators in high dimension
 #by Jeronimo Basa, Dennis Cook, Liliana Forzani and Miguel Marcos
@@ -120,9 +120,9 @@ for (i in 1:length(pvec)){
   print(paste("n =", n, "p =", p, "3rd:", coverage1))
   print(paste("n =", n, "p =", p, "4th:", coverage2))
 }
-###################################################
-###PRINTING THE RESULTS FOR COLUMNS THIRD AND FORTH
-###################################################
+###############################################################################
+###PRINTING THE RESULTS FOR COLUMNS THIRD AND FORTH Table 4.2 (Chapter 4)
+###############################################################################
 library(gridExtra)
 library(grid)
 A=matrix(cbind(nvec,pvec,apply(cover1,1,mean),apply(cover2,1,mean)),nrow=3)
@@ -136,7 +136,7 @@ grid.table(df, theme=tt)
 #############################  
 
 # Second simulation
-# Results for the fifth, sixth and seventh columns
+# Results for the fifth, sixth and seventh columns Table 4.4 Chapter 4
 # Uncomment the next two lines if you wish to run only the second simulation consistently
 rm(list=ls())
 set.seed(10)
@@ -260,9 +260,9 @@ for (i in 1:length(pvec)){
 
 #############################
 
-#####################################################################
-###PRINTING THE RESULTS FOR COLUMNS FIFTH SIXTH AND SEVENTH
-####################################################################
+#########################################################################################
+###PRINTING THE RESULTS FOR COLUMNS FIFTH SIXTH AND SEVENTH from Table 4.4 (Chapter 4)
+########################################################################################
 library(gridExtra)
 library(grid)
 A=matrix(cbind(nvec,pvec,apply(cover1,1,mean),apply(cover2,1,mean),apply(cover3,1,mean)),nrow=3)
