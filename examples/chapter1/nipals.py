@@ -50,9 +50,9 @@ rmse = mean_squared_error(Y_test, preds, squared=False)
 print(f"Moisture in corn: Best n = {best_n}, with RMSE of {rmse}")
 
 plt.scatter(Y_test, preds, facecolors='none', edgecolors='black')
-# plt.title("NIPALS Observed vs Predicted Response")
 plt.xlabel("Observed response, Y")
 plt.ylabel("Predicted response")
+plt.title("Plot 1.1")
 plt.show()
 
 
@@ -99,9 +99,9 @@ rmse = mean_squared_error(Y_test, preds, squared=False)
 print(f"Protein in meat: Best n = {best_n}, with RMSE of {rmse}")
 
 plt.scatter(Y_test, preds, facecolors='none', edgecolors='black')
-# plt.title("NIPALS Observed vs Predicted Response")
 plt.xlabel("Observed response, Y")
 plt.ylabel("Predicted response")
+plt.title("Plot 1.2")
 plt.show()
 
 
@@ -148,8 +148,8 @@ rmse = mean_squared_error(Y_test, preds, squared=False)
 print(f"Tetracycline in serum: Best n = {best_n}, with RMSE of {rmse}")
 
 plt.scatter(Y_test, preds, facecolors='none', edgecolors='black')
-# plt.title("NIPALS Observed vs Predicted Response")
 plt.xlabel("Observed response, Y")
 plt.ylabel("Predicted response")
+plt.title("Plot 1.3")
 plt.show()
 
