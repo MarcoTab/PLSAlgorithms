@@ -25,7 +25,7 @@ X1 <- scale(X,center=TRUE,scale=FALSE)
 mod <- plsr(y ~ X, ncomp = 4, scale=FALSE,validation = "LOO")
 summary(mod)
 
-#this is the picture 4.1 
+#this is the Figure 4.1 
  
 modM <- plsr(y~X, ncomp = 1)
 #pdf("yvsfitted.pdf", bg = "transparent", width = 8, height = 6)
