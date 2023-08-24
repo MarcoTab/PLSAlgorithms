@@ -117,10 +117,7 @@ print(round(SIhat2,3))
 
 
 ###################################################################
-#This is the script to reproduce Figure 1 from the paper
-#Asymptotic distribution of one-component partial least
-#squares regression estimators in high dimension
-#by Jeronimo Basa, Dennis Cook, Liliana Forzani and Miguel Marcos
+#Figure 4.4
 ###################################################################
 
 ### WARNING

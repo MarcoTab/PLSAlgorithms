@@ -10,9 +10,9 @@ library(matrixcalc)
 library(matrixcalc)
 
 
-###################
-# Skagerberg data #
-###################
+######################################
+# Table 6.2 using Skagerberg data #
+######################################
 
 ####PPLS PARTIAL OLS and ENV partial table 6.2 
 
@@ -28,13 +28,12 @@ library(matrixcalc)
 aux <- read_csv("~/Dropbox/more-pls/pls-simultaneous/computing/datasets/Process_data_Skagerberg1992 - Sheet1.csv")
 
 
+ 
 
-#Skagerber_data <- read_csv("Process_data_Skagerberg1992 - Sheet1.csv")
-
-#para reducir
+#to reduce
 X1=as.matrix(aux[,1:20])
 
-#sin reducir
+#without reducing
 X2=as.matrix(aux[,21:22])
 
 
@@ -67,34 +66,34 @@ for (d in 1:Dmax){
     #testing
     aux2=aux[i,]
     
-    ###matriz X que se reduce
+    ###matrix X that it will reduce
     AA=as.matrix(aux1[,1:20],ncol=20)
     
      
-    ###regresion de las continuas X en las que no reduzco
+    ###continuos X reduced regression on the not reduced one
     A=lm(AA~Tw+S,data=aux1)
     
-    #guardo los residuos
+    #save the residuals
     aux1$SS=A$residuals 
     
     
     
-    ###predigo en el nuevo dato
+    ###predict for a new data
     A_1=predict(A,newdata=aux2)
     
-    #cnetro la resputa en los de training
+    #center using the training
     aux1$ynew=scale(aux1$Y,scale=FALSE)
     
-    ## hago pls en los residuos en el training
+    ## pls onn the residuals
     m=plsr(ynew~SS,ncomp=d,data=aux1)
     
-    #hago la regresion en las variables no reducidas
+    #regression on the non-reduced variables
     j=lm(ynew~Tw+S,data=aux1)
     
-    #predigo las no reducidas en el nuevo dato
+    #predict using the not reduced in a new data set
     j_2=predict(j,newdata=aux2)
     
-    #prediccion final en el nuevo datos
+    #final prediction on the new dataset
     yhat=apply(aux1$Y,2,mean)+j_2+as.numeric(as.matrix((aux2[,1:20]-A_1),nrow=1)%*%as.matrix(m$coefficients[,1:6,d],ncol=6))
     
     
@@ -137,7 +136,7 @@ for (d in 1:Dmax){
 
  
  
- 
+ ##out of sample error for each d
  
  p.ols=NULL
  p.pls=NULL
@@ -170,15 +169,15 @@ for (d in 1:Dmax){
  
  #######
  
- #########COLUMNS 5,6 
+ ##table 6.2 columns 5,6 
  
  
  
  
- #para reducir
+ #to reduce
  X1=as.matrix(aux[,1:20])
  
- #sin reducir
+ #not to reduce
  X2=as.matrix(aux[,21:22])
  
  
@@ -194,7 +193,7 @@ for (d in 1:Dmax){
  error_prpls=array(NaN, dim=c(nrow(X1),ncol(Y),ncol(X1)))
  
  
- ##### voy a hacerlo para diferenes d el envelope
+ ##### leave one out error for different d
  for (d in 1:ncol(Y)){
    for (i in 1:nrow(X1)){
      fit <- penv(X1[-i,],X2[-i,],Y[-i,], d)
@@ -210,7 +209,7 @@ for (d in 1:Dmax){
  
  
  
- ####ppls lo hago para d =1 apartelo hago para d=1 aparte 
+ ####d=1 i have to do it sepparetly (Not know why)
  
  for (i in 1:nrow(X1)){
    X1c=scale(X1[-i,],scale=FALSE)
@@ -241,7 +240,7 @@ for (d in 1:Dmax){
  }
  
  
- ###ppls para el resto de los d
+ ###ppls for the rest of the d
  
  
  
@@ -274,7 +273,9 @@ for (d in 1:Dmax){
      
    }
  }
+
  
+ ##choosing d 
  
  p.ols=NULL
  p.pls=NULL
@@ -289,7 +290,7 @@ for (d in 1:Dmax){
  
  
  
- 
+ ##choosing d 
  
  
  d_pls=which.min(p.pls)

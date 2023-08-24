@@ -199,3 +199,5 @@ plot(JJ,H[,1],type='b' ,col='blue',ylim=c(0,25), lwd=2.5, xlim=c(100,1200), main
 lines(JJ,H[,2],type='l' ,col='red', lwd=2.5)
  lines(JJ,H[,3],type='l' ,col='orange', lwd=2.5)
  lines(JJ,H[,4],type='l' ,col='dark green', lwd=2.5)
+
+ 
