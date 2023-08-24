@@ -69,6 +69,74 @@ plt.title("Figure 4.1")
 plt.show()
 
 
+# compute SD using the formulas from 
+# Envelopes and partial least squares regression
+# R. D. Cook, I. S. Helland, Z. Su
+# Pages 851-877
+# Number of pages 27
+# Journal of the Royal Statistical Society. Series B: Statistical Methodology
+# Volume 75
+# Issue number 5
+# Date Published - Nov 2013
+shat = np.cov(np.concatenate((Y, X), axis=1), rowvar=False)[0, 1:].reshape(-1,1)
+sts = (shat.T @ shat)[0,0]
+sigma_0hat, r = np.linalg.qr(shat, mode="complete")
+sigma_0hat = sigma_0hat[:,1:X.shape[1]]
+SIhat = np.cov(X, rowvar=False)
+Omegahat = ((shat.T @ SIhat @ shat) / sts)[0,0]
+Omega0hat = (sigma_0hat.T @ SIhat @ sigma_0hat)
+SIhat2 = (Omegahat/sts) * (shat@shat.T) + (sigma_0hat @ Omega0hat @ sigma_0hat.T)
+sigmaY2hat = np.var(Y, ddof=1)
+m = Y.shape[0] - 1
+
+# Keep track of stds
+sds=[]
+
+# Compute Beta 1 SD
+XN = np.array([[1,0,0,0]]).reshape(-1,1)
+Vhat = ( (Omegahat**(-2)/m) * XN.T @ (SIhat2 * sigmaY2hat - shat@shat.T) @ XN )[0,0]
+sds.append(round(np.sqrt(Vhat),4))
+
+# Compute Beta 2 SD
+XN = np.array([[0,1,0,0]]).reshape(-1,1)
+Vhat = ( (Omegahat**(-2)/m) * XN.T @ (SIhat2 * sigmaY2hat - shat@shat.T) @ XN )[0,0]
+sds.append(round(np.sqrt(Vhat),4))
+
+# Compute Beta 3 SD
+XN = np.array([[0,0,1,0]]).reshape(-1,1)
+Vhat = ( (Omegahat**(-2)/m) * XN.T @ (SIhat2 * sigmaY2hat - shat@shat.T) @ XN )[0,0]
+sds.append(round(np.sqrt(Vhat),4))
+
+# Compute Beta 4 SD
+XN = np.array([[0,0,0,1]]).reshape(-1,1)
+Vhat = ( (Omegahat**(-2)/m) * XN.T @ (SIhat2 * sigmaY2hat - shat@shat.T) @ XN )[0,0]
+sds.append(round(np.sqrt(Vhat),4))
+
+# Get betas from trained model
+coefs = [round(c[0], 3) for c in best_pls.coef_]
+
+# For pretty print
+SUB = str.maketrans("1234", "₁₂₃₄")
+table = {
+    "Estimate": coefs,
+    "S.D.": sds
+}
+print("Table 4.1: PLS")
+print(tabulate(table, showindex=["β" + str(i+1).translate(SUB) for i in range(4)], headers="keys"))
+print()
+
+SIhat2 = np.round(SIhat2, 3)
+
+# For pretty print
+table = {
+    "log H": SIhat2[0],
+    "log L": SIhat2[1],
+    "log S": SIhat2[2],
+    "log W": SIhat2[3]
+}
+print("Table 4.2: PLS")
+print(tabulate(table, showindex=["log H", "log L", "log S", "log W"], headers="keys"))
+print()
 
 
 print("Simulating", end="", flush=True)
@@ -266,73 +334,3 @@ axs[1].set_ylabel("Standard deviation")
 axs[1].set_xlabel("log p")
 
 plt.show()
-
-
-# compute SD using the formulas from 
-# Envelopes and partial least squares regression
-# R. D. Cook, I. S. Helland, Z. Su
-# Pages 851-877
-# Number of pages 27
-# Journal of the Royal Statistical Society. Series B: Statistical Methodology
-# Volume 75
-# Issue number 5
-# Date Published - Nov 2013
-shat = np.cov(np.concatenate((Y, X), axis=1), rowvar=False)[0, 1:].reshape(-1,1)
-sts = (shat.T @ shat)[0,0]
-sigma_0hat, r = np.linalg.qr(shat, mode="complete")
-sigma_0hat = sigma_0hat[:,1:X.shape[1]]
-SIhat = np.cov(X, rowvar=False)
-Omegahat = ((shat.T @ SIhat @ shat) / sts)[0,0]
-Omega0hat = (sigma_0hat.T @ SIhat @ sigma_0hat)
-SIhat2 = (Omegahat/sts) * (shat@shat.T) + (sigma_0hat @ Omega0hat @ sigma_0hat.T)
-sigmaY2hat = np.var(Y, ddof=1)
-m = Y.shape[0] - 1
-
-# Keep track of stds
-sds=[]
-
-# Compute Beta 1 SD
-XN = np.array([[1,0,0,0]]).reshape(-1,1)
-Vhat = ( (Omegahat**(-2)/m) * XN.T @ (SIhat2 * sigmaY2hat - shat@shat.T) @ XN )[0,0]
-sds.append(round(np.sqrt(Vhat),4))
-
-# Compute Beta 2 SD
-XN = np.array([[0,1,0,0]]).reshape(-1,1)
-Vhat = ( (Omegahat**(-2)/m) * XN.T @ (SIhat2 * sigmaY2hat - shat@shat.T) @ XN )[0,0]
-sds.append(round(np.sqrt(Vhat),4))
-
-# Compute Beta 3 SD
-XN = np.array([[0,0,1,0]]).reshape(-1,1)
-Vhat = ( (Omegahat**(-2)/m) * XN.T @ (SIhat2 * sigmaY2hat - shat@shat.T) @ XN )[0,0]
-sds.append(round(np.sqrt(Vhat),4))
-
-# Compute Beta 4 SD
-XN = np.array([[0,0,0,1]]).reshape(-1,1)
-Vhat = ( (Omegahat**(-2)/m) * XN.T @ (SIhat2 * sigmaY2hat - shat@shat.T) @ XN )[0,0]
-sds.append(round(np.sqrt(Vhat),4))
-
-# Get betas from trained model
-coefs = [round(c[0], 3) for c in best_pls.coef_]
-
-# For pretty print
-SUB = str.maketrans("1234", "₁₂₃₄")
-table = {
-    "Estimate": coefs,
-    "S.D.": sds
-}
-print("Table 4.1: PLS")
-print(tabulate(table, showindex=["β" + str(i+1).translate(SUB) for i in range(4)], headers="keys"))
-print()
-
-SIhat2 = np.round(SIhat2, 3)
-
-# For pretty print
-table = {
-    "log H": SIhat2[0],
-    "log L": SIhat2[1],
-    "log S": SIhat2[2],
-    "log W": SIhat2[3]
-}
-print("Table 4.2: PLS")
-print(tabulate(table, showindex=["log H", "log L", "log S", "log W"], headers="keys"))
-
