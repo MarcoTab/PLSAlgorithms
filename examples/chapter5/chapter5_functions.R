@@ -39,20 +39,12 @@ twoblock_pls_onestep_fun=function(mymatrix){
 twoblock_pls_fun=function(X,Y,d){
   i=1
   S_XY=cov(X,Y)
-  S_YX=cov(Y,X)
+  #S_YX=cov(Y,X)
   S_X=var(X)
   S_Y=var(Y)
-  mymatrix=S_XY
+  #mymatrix=S_XY
   u.m=matrix(0,nrow=ncol(X),ncol=d)
   v.m=matrix(0,nrow=ncol(Y),ncol=d)
-  # for(i in 1:d){
-  #   twoblock_pls_onestep_result=twoblock_pls_onestep_fun(mymatrix)
-  #   u.current=twoblock_pls_onestep_result$u
-  #   v.current=twoblock_pls_onestep_result$v
-  #   u.m[,i]=u.current
-  #   v.m[,i]=v.current
-  #   mymatrix=t(cal_Q_fun(u.m[,1:i],S_X))%*%S_XY%*%cal_Q_fun(v.m[,1:i],S_Y)
-  # }
   twoblock_result=twoblock_pls_bymatrix_fun(SigmaX=S_X,SigmaY=S_Y,SigmaXY=S_XY,d)
   u.m=twoblock_result$u.m
   v.m=twoblock_result$v.m
@@ -65,10 +57,6 @@ twoblock_pls_fun=function(X,Y,d){
 #--------------------------------------#
 twoblock_pls_bymatrix_fun=function(SigmaX,SigmaY,SigmaXY,d){
   i=1
-  # S_XY=cov(X,Y)
-  # S_YX=cov(Y,X)
-  # S_X=var(X)
-  # S_Y=var(Y)
   mymatrix=SigmaXY
   u.m=matrix(0,nrow=ncol(SigmaX),ncol=d)
   v.m=matrix(0,nrow=ncol(SigmaY),ncol=d)
@@ -82,6 +70,7 @@ twoblock_pls_bymatrix_fun=function(SigmaX,SigmaY,SigmaXY,d){
   }
   return(list(u.m=u.m,v.m=v.m,singular_value.v=svd(mymatrix)$d))
 }
+
 
 #-------------------------------------#
 # Function to calculate the dimension # 
@@ -157,9 +146,9 @@ cal_twoblockpls_fun=function(d,X_CV_train,Y_CV_train,X_CV_test,Y_CV_test,
   X=X_CV_train
   Y=Y_CV_train
   S_XY=cov(X,Y)
-  S_YX=cov(Y,X)
+  #S_YX=cov(Y,X)
   S_X=var(X)
-  S_Y=var(Y)
+  #S_Y=var(Y)
   mean_X.m=matrix(rep(colMeans(X),each=nrow(X_CV_test)),ncol=ncol(X))
   mean_Y.m=matrix(rep(colMeans(Y),each=nrow(Y_CV_test)),ncol=ncol(Y))
   
@@ -184,9 +173,9 @@ cal_simul_pls_fun=function(d.v,X_CV_train,Y_CV_train,X_CV_test,Y_CV_test,
   Y=Y_CV_train
   #Y=as.matrix(Y[,4]) ###############*****************
   S_XY=cov(X,Y)
-  S_YX=cov(Y,X)
+  #S_YX=cov(Y,X)
   S_X=var(X)
-  S_Y=var(Y)
+  #S_Y=var(Y)
   d1=d.v[1]
   d2=d.v[2]
   mean_X.m=matrix(rep(colMeans(X),each=nrow(X_CV_test)),ncol=ncol(X))
@@ -206,6 +195,8 @@ cal_simul_pls_fun=function(d.v,X_CV_train,Y_CV_train,X_CV_test,Y_CV_test,
   cor_simul_pls_Y_Yhat<<-cor(Y_CV_test%*%(diag(1/scaleY_CV_train.v)),simul_pls_hat_Y)    ### changed
   return(c(simul_pls_Y_MSE))
 }
+
+
 #------------------------------------------------------------#
 #       function to use cross validation to select           #
 # the dimension of two blocks PLS, simultaneous PLS and PLS1 #
@@ -636,7 +627,7 @@ rrenv <- function(X, Y, u, d) {
 
 
 #------------------------------------------#
-# supplementary function neeeded for rrenv #
+# supplementary function neeeded for rrenv #
 #------------------------------------------#
 rrenvMU <- function(M, U, u, d) {
 

@@ -655,3 +655,4 @@ row.names(result.m)=c("predMSE1","predMSE2","betaMSE")
 colnames(result.m)=c("ols",'twoblock','stenv',"pls","simul_pls")
 
 print(result.m)
+
