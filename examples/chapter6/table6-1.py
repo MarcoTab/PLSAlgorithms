@@ -90,8 +90,6 @@ for this_aux in table_lines:
     for d in range(mm):
         for i in range(n):
             progbar.next()
-            # print(f"{d*n+i}", end=", ", flush=True)
-            # Split into train and test
             X11_train = np.delete(X1, i, 0)
             X22_train = np.delete(X2, i, 0)
             y_train = np.delete(y, i)
@@ -125,7 +123,8 @@ for this_aux in table_lines:
             j_2 = j.predict(X22_test)
 
             # Final prediction on new data
-            yhat = np.mean(y_train) + j_2.item() + ((X11_test - A_1) @ (m.coef_)).item()
+
+            yhat = np.mean(y_train) + j_2.item() + ((X11_test - A_1) @ (m.coef_).T).item()
 
             pls_predict[i,d] = yhat
             MSE_PLS[i,d] = yhat - y_test
@@ -180,7 +179,7 @@ for this_aux in table_lines:
                 yhat = fit.predict(test_predictors)
 
                 ols_predict[i,d] = yhat
-                MSE_OLS = yhat - y_test
+                MSE_OLS[i,d] = yhat - y_test
 
             # TODO Envelope package
             # if (X11_train.shape[0] > this_aux.shape[1]):
