@@ -3,7 +3,7 @@ matplotlib==3.5.1
 numpy==1.24.2
 pandas==1.5.2
 progress==1.6
-scikit_learn==1.0.2
+scikit_learn>=1.1
 scipy==1.8.0
 sliced==0.7.0
 tabulate==0.8.9
