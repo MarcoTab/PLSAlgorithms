@@ -1,6 +1,5 @@
 rm(list=ls())
 library('pls')
-library(EPPLS)
 library(readr)
 library(Renvlp) 
 library(matrixcalc)
