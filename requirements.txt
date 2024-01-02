@@ -8,3 +8,4 @@ scipy==1.8.0
 sliced==0.7.0
 tabulate==0.8.9
 tqdm
+semopy
