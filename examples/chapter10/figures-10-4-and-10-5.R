@@ -20,10 +20,10 @@ library(pracma)
 library(MASS)
 library(psych)
 
-source("rrenv.R")
-source("rrr.R")
-source("GE.R")
-source("envMU.R")
+source("examples/chapter10/lib/rrenv.R")
+source("examples/chapter10/lib/rrr.R")
+source("examples/chapter10/lib/GE.R")
+source("examples/chapter10/lib/envMU.R")
 
 
 set.seed(1)
