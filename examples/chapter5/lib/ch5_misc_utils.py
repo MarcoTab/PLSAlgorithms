@@ -40,7 +40,7 @@ def twoblock_pls_bymatrix_fun(d, SigmaX, SigmaY, SigmaXY):
         u_m[:, i] = u_current
         v_m[:, i] = v_current
 
-        mymatrix = cal_Q_fun(u_m[:,:i], SigmaX).T @ SigmaXY @ cal_Q_fun(v_m[:, :i], SigmaY)
+        mymatrix = cal_Q_fun(u_m[:,:i+1], SigmaX).T @ SigmaXY @ cal_Q_fun(v_m[:, :i+1], SigmaY)
 
     _, svs, _ = np.linalg.svd(mymatrix, full_matrices=False)
 
@@ -65,9 +65,34 @@ def cal_d_twoblock_fun(SigmaX, SigmaY, SigmaXY, mytol=1e-3):
 
         twoblock_result = twoblock_pls_bymatrix_fun(d,SigmaX=SigmaX, SigmaY=SigmaY, SigmaXY=SigmaXY)
 
-        _, svs, _ = np.linalg.svd(twoblock_result["singular_value_v"], full_matrices=False)
-        singular_value_sum = svs.sum()
+        singular_value_sum = twoblock_result["singular_value_v"].sum()
     
     return d
 
 
+def refit_entire_training_and_get_testMSE_fun(Xtrain, Ytrain, Xtest, Ytest, d, d1, d2, d_pls, d_pls1, if_Xscale, if_Yscale):\
+    
+    if if_Xscale:
+        scaleXtrain_v = np.std(Xtrain, axis=0)
+    else:
+        scaleXtrain_v = np.ones((Xtrain.shape[1],))
+    
+    Xtrain_scaled = Xtrain / scaleXtrain_v
+
+    if if_Yscale:
+        scaleYtrain_v = np.std(Ytrain, axis=0)
+    else:
+        scaleYtrain_v = np.ones((Ytrain.shape[1],))
+
+    Ytrain_scaled = Ytrain / scaleYtrain_v
+
+    X = Xtrain_scaled
+    Y = Ytrain_scaled
+
+    Xc = X - X.mean(axis=0, keepdims=True)
+    Yc = (Y - Y.mean()) / (X.shape[0]-1)
+
+    S_XY = np.dot(Xc.T, Yc)
+
+    print(S_XY.shape)
+    exit()

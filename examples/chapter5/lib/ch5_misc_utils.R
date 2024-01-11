@@ -312,18 +312,18 @@ refit_entire_training_and_get_testMSE_fun=function(Xtrain,Ytrain,Xtest,Ytest,d,d
                                                    if.Xscale,if.Yscale){
   if(if.Xscale){
     scaleXtrain.v= apply(Xtrain,2,sd)
-    Xtrain_scaled = sweep(Xtrain,2,scaleXtrain.v,'/')
   }else{
     scaleXtrain.v= rep(1,length=ncol(Xtrain))
-    Xtrain_scaled = Xtrain
   }
+  Xtrain_scaled = sweep(Xtrain,2,scaleXtrain.v,'/')
+  
   if(if.Yscale){
     scaleYtrain.v= apply(Ytrain,2,sd)
-    Ytrain_scaled = sweep(Ytrain,2,scaleYtrain.v,'/')
   }else{
     scaleYtrain.v= rep(1,length=ncol(Ytrain))
-    Ytrain_scaled = Ytrain
   }
+  Ytrain_scaled = sweep(Ytrain,2,scaleYtrain.v,'/')
+  
   X=Xtrain_scaled
   Y=Ytrain_scaled
   S_XY=cov(X,Y)

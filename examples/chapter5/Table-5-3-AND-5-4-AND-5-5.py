@@ -67,6 +67,50 @@ def sim_fun(i, p, r, dx, dy, N, M, simul_vers=1):
     sigmaC = np.vstack((np.hstack((sigmaX, sigmaXY)), np.hstack((sigmaXY.T, sigmaY)))) 
     sigmaD = sp.linalg.block_diag(sigmaX, sigmaY)
 
-    d_two_block_pop = cal_d_twoblock_fun(SigmaX=sigmaX, SigmaY=sigmaY, SigmaXY=sigmaXY, mytol=1e-3)
+    d_twoblock_pop = cal_d_twoblock_fun(SigmaX=sigmaX, SigmaY=sigmaY, SigmaXY=sigmaXY, mytol=1e-3)
+
+    if i == 0:
+        print(f"The dimension of population two block PLS is {d_twoblock_pop}")
+
+    np.random.seed(i)
+
+    datavec = np.random.multivariate_normal(np.zeros((p+r,)), sigmaC, size=N+M)
+
+    X = datavec[:, :p]
+    Y = datavec[:, p:(p+r)]
+
+    Xtrain = X[:N]  # Extract training features
+    Ytrain = Y[:N]  # Extract training labels
+
+    Xtest = X[N:]  # Extract test features. The original paper only calculates thye in sample MSE.
+    Ytest = Y[N:]
+
+    if_Xscale = False
+    if_Yscale = False
+
+    d_pls = dx
+
+    predMSE2_twoblock_test = None
+    predMSE1_twoblock_test = None
+    betaMSE_twoblock = None
+    
+    predMSE2_pls_test = None
+    predMSE1_pls_test = None
+    betaMSE_pls = None
+
+    predMSE2_simul_pls_test = None
+    predMSE1_simul_pls_test = None
+    betaMSE_simul_pls = None
+
+    if (max(r,dx,dy,d_twoblock_pop) <= N):
+        d_pls1 = np.ones((r,2))
+        d_pls1[:, 0] = dx
+
+        refit_result = refit_entire_training_and_get_testMSE_fun(
+            Xtrain, Ytrain, Xtest, Ytest, d=d_twoblock_pop, d1=dx, d2=dy,
+            d_pls=[dx, r], d_pls1=d_pls1,
+            if_Xscale=if_Xscale, if_Yscale=if_Yscale
+        )
+
 
 sim_fun(i=0, p=50, r=4, dx=10, dy=3, N=1000, M=1000, simul_vers=1)

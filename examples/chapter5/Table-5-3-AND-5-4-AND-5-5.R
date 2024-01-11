@@ -21,7 +21,6 @@ sim_fun=function(i,p,r,dx,dy,N,M, simul_vers=1){
   #%   Envelopes model parameters          %
   #  %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
   trueG_temp=matrix(runif(dx*p,0,1),nrow=p)
-  #print(trueG_temp)
   trueG = svd(trueG_temp)$u;   # X-envelope basis
   trueG0 =qr.Q(qr(trueG),complete=TRUE) [,-(1:dx)]
   
@@ -78,7 +77,7 @@ sim_fun=function(i,p,r,dx,dy,N,M, simul_vers=1){
   Y = datavec[,(p+1):(p+r)]
   Xtrain<-X[(1:N),] # extract training data
   Ytrain<-Y[(1:N),] # extract training data
-  Xtest<-X[-(1:N),] # extract test data, the original paper only calculate the in sample MSE
+  Xtest<-X[-(1:N),] # extract test data. the original paper only calculates the in sample MSE
   Ytest<-Y[-(1:N),]# extract test data
   if.Xscale=F
   if.Yscale=F
@@ -102,7 +101,7 @@ sim_fun=function(i,p,r,dx,dy,N,M, simul_vers=1){
   
   if (max(r,dx,dy,d_twoblock_pop)<=(N)){
   
-  refit_result=refit_entire_training_and_get_testMSE_fun(Xtrain,Ytrain,Xtest,Ytest,
+    refit_result=refit_entire_training_and_get_testMSE_fun(Xtrain,Ytrain,Xtest,Ytest,
                                                          #d=min(dx,dy),
                                                          d=d_twoblock_pop,
                                                          d1=dx,
