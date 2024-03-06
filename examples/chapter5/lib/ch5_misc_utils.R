@@ -315,6 +315,7 @@ refit_entire_training_and_get_testMSE_fun=function(Xtrain,Ytrain,Xtest,Ytest,d,d
   }else{
     scaleXtrain.v= rep(1,length=ncol(Xtrain))
   }
+  
   Xtrain_scaled = sweep(Xtrain,2,scaleXtrain.v,'/')
   
   if(if.Yscale){
@@ -322,6 +323,7 @@ refit_entire_training_and_get_testMSE_fun=function(Xtrain,Ytrain,Xtest,Ytest,d,d
   }else{
     scaleYtrain.v= rep(1,length=ncol(Ytrain))
   }
+  
   Ytrain_scaled = sweep(Ytrain,2,scaleYtrain.v,'/')
   
   X=Xtrain_scaled

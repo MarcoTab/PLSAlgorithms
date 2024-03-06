@@ -94,5 +94,10 @@ def refit_entire_training_and_get_testMSE_fun(Xtrain, Ytrain, Xtest, Ytest, d, d
 
     S_XY = np.dot(Xc.T, Yc)
 
-    print(S_XY.shape)
+    Yc = Y - Y.mean(axis=0, keepdims=True)
+    Xc = (X - X.mean()) / (Y.shape[0]-1)
+
+    S_YX = np.dot(Yc.T, Xc)
+
+    print(S_YX.shape)
     exit()
