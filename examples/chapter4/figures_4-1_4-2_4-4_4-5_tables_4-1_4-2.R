@@ -1,3 +1,4 @@
+rm(list=ls())
 library(pls)
 library(car)
 # predictors L,H,S,W
@@ -25,7 +26,7 @@ X1 <- scale(X,center=TRUE,scale=FALSE)
 mod <- plsr(y ~ X, ncomp = 4, scale=FALSE,validation = "LOO")
 summary(mod)
 
-#this is the picture 4.1 
+#this is the figure 4.1 
  
 modM <- plsr(y~X, ncomp = 1)
 #pdf("yvsfitted.pdf", bg = "transparent", width = 8, height = 6)
@@ -34,7 +35,9 @@ plot(modM$fitted.values,y,main="",
 abline(0,1,col="blue",lwd=2)
 dev.off()
 
-
+#this is the figure 4.2
+plot(modM$fitted.values,lm(y~X)$fitted.values,pch=19,ylab="",xlab="")
+abline(0,1,col="blue",lwd=2)
 
 ###Table 4.1: Coefficient estimates and 
 ###corresponding asymptotic standard deviations (S.D.) 
@@ -117,7 +120,7 @@ print(round(SIhat2,3))
 
 
 ###################################################################
-#This is the script to reproduce Figure 1 from the paper
+#This is the script to reproduce Figure 1 from the paper (figure 4.4 of the book)
 #Asymptotic distribution of one-component partial least
 #squares regression estimators in high dimension
 #by Jeronimo Basa, Dennis Cook, Liliana Forzani and Miguel Marcos
@@ -291,7 +294,7 @@ dev.off()
 
 
 
-## FIGURE 4-5
+## FIGURE 4.5
 
 
 A=matrix(0,ncol=2,nrow=9)

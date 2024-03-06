@@ -7,6 +7,7 @@ warnings.filterwarnings("ignore")
 import numpy as np
 from sklearn.model_selection import LeaveOneOut
 from sklearn.cross_decomposition import PLSRegression
+from sklearn.linear_model import LinearRegression
 from sklearn.metrics import mean_squared_error
 import matplotlib.pyplot as plt
 import pandas as pd
@@ -59,6 +60,20 @@ plt.xlabel("Observed response, Y")
 plt.ylabel("Predicted response")
 plt.title("Figure 4.1")
 plt.show()
+
+
+ols = LinearRegression()
+
+ols.fit(X, Y)
+predsols = ols.predict(X)
+
+plt.scatter(preds, predsols, facecolors="black")
+plt.plot(line, line, '-r', color="blue")
+plt.xlabel("ols")
+plt.ylabel('pls')
+plt.title("Figure 4.2")
+plt.show()
+
 
 # compute SD using the formulas from 
 # Envelopes and partial least squares regression

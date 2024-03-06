@@ -10,7 +10,7 @@ set.seed(10)
 
 
 ###############################
-#This is the script to reproduce Table 2 from the paper
+#This is the script to reproduce Table 2 (table 4.4 in the book) from the paper
 #Asymptotic distribution of one-component partial least
 #squares regression estimators in high dimension
 #by Jeronimo Basa, Dennis Cook, Liliana Forzani and Miguel Marcos

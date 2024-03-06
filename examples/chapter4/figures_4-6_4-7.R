@@ -1,5 +1,7 @@
 
-library(chemometrics)
+# Reproduces figures 4.6 and 4.7
+rm(list=ls())
+library(pls)
 ycal <- read.table("data/chapter4/ycal.txt", quote="\"", comment.char="")
  
 ytest <- read.table("data/chapter4/ytest.txt", quote="\"", comment.char="")

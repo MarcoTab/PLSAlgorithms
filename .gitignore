@@ -9,3 +9,5 @@ _templates/
 __pycache__/
 .Rhistory
 .RData
+.Rproj.user
+*.Rproj

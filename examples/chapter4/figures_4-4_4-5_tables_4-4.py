@@ -1,5 +1,5 @@
 # Chapter 4
-# Figure 4.4 and Table 4.4
+# Figures 4.4, 4.5 and Table 4.4
 #### READ BEFORE RUNNING ALL THE WAY THROUGH
 # There is a very long simulation that runs as part of this script. 
 # To avoid having to run this simulation again and again, please uncomment the code below (you might have to scroll a
@@ -16,6 +16,7 @@ import numpy as np
 import pandas as pd
 import scipy as sp
 from sklearn.cross_decomposition import PLSRegression
+import matplotlib.pyplot as plt
 
 
 
@@ -193,6 +194,9 @@ for j in range(9):
     A[j] = np.array([np.median(pe_pls1[j]), np.std(pe_pls1[j])])
     B[j] = np.array([np.median(pe_pls2[j]), np.std(pe_pls2[j,pe_pls2[j]<15])])
 
+
+# Figure 4.5
+    
 axs[0].plot(np.log(p_vec), A[:,0], color="red", linewidth=2)
 axs[0].plot(np.log(p_vec), B[:,0], color="blue", linewidth=2)
 axs[0].plot(np.log(p_vec), A[:,0], '.', marker="o", markerfacecolor="none", color="red", linewidth=2)
