@@ -1,5 +1,5 @@
 # Chapter 4
-# Figure 4.1, Tables 4.1, 4.2
+# Figure 4.1, 4.2, Tables 4.1, 4.2
 
 import warnings
 warnings.filterwarnings("ignore")
