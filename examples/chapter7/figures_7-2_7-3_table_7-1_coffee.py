@@ -140,7 +140,7 @@ plt.legend(loc='best')
 plt.show()
 
 
-# Figure 7.4.c
+# Figure 7.3.c
 d=Dmax
 # ISO
 reg = LinearRegression()
