@@ -7,6 +7,7 @@ import numpy as np
 from sklearn.cross_decomposition import PLSRegression
 from sklearn.metrics import mean_squared_error
 from sklearn.model_selection import cross_val_score
+from sklearn.linear_model import LassoCV
 import matplotlib.pyplot as plt
 
 # Read in corn data
@@ -46,11 +47,18 @@ preds = best_nipals.predict(X_test)
 
 # Compute RMSE
 rmse = mean_squared_error(Y_test, preds, squared=False)
-
 print(f"Moisture in corn: Best n = {best_n}, with RMSE of {rmse}")
 
+
+print("Fitting lasso...")
+lasso = LassoCV()
+lasso.fit(X_train, Y_train)
+lasso_preds = lasso.predict(X_test)
+
+
 plt.scatter(Y_test, preds, facecolors='none', edgecolors='black')
-# plt.title("NIPALS Observed vs Predicted Response")
+plt.scatter(Y_test, lasso_preds, facecolor='red', marker='+')
+plt.title("Figure 1.1: Corn Moisture")
 plt.xlabel("Observed response, Y")
 plt.ylabel("Predicted response")
 plt.show()
@@ -98,8 +106,14 @@ rmse = mean_squared_error(Y_test, preds, squared=False)
 
 print(f"Protein in meat: Best n = {best_n}, with RMSE of {rmse}")
 
+print("Fitting lasso...")
+lasso = LassoCV()
+lasso.fit(X_train, Y_train)
+lasso_preds = lasso.predict(X_test)
+
 plt.scatter(Y_test, preds, facecolors='none', edgecolors='black')
-# plt.title("NIPALS Observed vs Predicted Response")
+plt.scatter(Y_test, lasso_preds, facecolor='red', marker='+')
+plt.title("Figure 1.2: Meat Protein")
 plt.xlabel("Observed response, Y")
 plt.ylabel("Predicted response")
 plt.show()
@@ -147,8 +161,15 @@ rmse = mean_squared_error(Y_test, preds, squared=False)
 
 print(f"Tetracycline in serum: Best n = {best_n}, with RMSE of {rmse}")
 
+
+print("Fitting lasso...")
+lasso = LassoCV()
+lasso.fit(X_train, Y_train)
+lasso_preds = lasso.predict(X_test)
+
 plt.scatter(Y_test, preds, facecolors='none', edgecolors='black')
-# plt.title("NIPALS Observed vs Predicted Response")
+plt.scatter(Y_test, lasso_preds, facecolor='red', marker='+')
+plt.title("Figure 1.3: Serum Tetracycline")
 plt.xlabel("Observed response, Y")
 plt.ylabel("Predicted response")
 plt.show()
