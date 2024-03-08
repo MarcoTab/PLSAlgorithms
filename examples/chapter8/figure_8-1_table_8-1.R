@@ -7,8 +7,8 @@ library(mosaic)
 library(ggplot2)
 
 marcewithout <- read.table("data/chapter8/marcewithout.txt", quote="\"", comment.char="")
-source("examples/chapter8/quadratic_with_cross_validation.R")
-source("examples/chapter8/pls_matrices.R")
+source("examples/chapter8/lib/quadratic_with_cross_validation.R")
+source("examples/chapter8/lib/pls_matrices.R")
 
 Y=marcewithout[,1]+1
 

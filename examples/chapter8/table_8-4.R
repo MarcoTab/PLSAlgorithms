@@ -7,8 +7,8 @@ library(readr)
  
 FTIR_Spectra_instant_coffee <- read.csv("data/chapter8/coffee.csv", header=FALSE)
  
-source("examples/chapter8/quadratic_with_cross_validation.R")
-source("examples/chapter8/pls_matrices.R")
+source("examples/chapter8/lib/quadratic_with_cross_validation.R")
+source("examples/chapter8/lib/pls_matrices.R")
 Y=as.numeric(t(FTIR_Spectra_instant_coffee[2,2:57]))
  
 Y=matrix(Y,ncol=1)

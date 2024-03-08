@@ -7,8 +7,8 @@ from tabulate import tabulate
 import matplotlib.pyplot as plt
 import pandas as pd
 
-from quadratic_with_cross_validation import quadratic_discrimination
-from pls_matrices import pls_matrices
+from lib.quadratic_with_cross_validation import quadratic_discrimination
+from lib.pls_matrices import pls_matrices
 import functools as ft
 
 np.random.seed(5)

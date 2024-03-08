@@ -2,8 +2,8 @@ rm(list=ls())
 library(caret)
 library(matrixcalc)
 
-source("examples/chapter8/pls_matrices.R")
-source("examples/chapter8/quadratic_with_cross_validation.R")
+source("examples/chapter8/lib/pls_matrices.R")
+source("examples/chapter8/lib/quadratic_with_cross_validation.R")
 
  
 MIR_Fruit_purees <- read.csv("data/chapter8/MIR_Fruit_purees.csv", header=FALSE)

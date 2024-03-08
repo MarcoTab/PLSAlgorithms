@@ -5,8 +5,8 @@ import numpy as np
 from sklearn.metrics import confusion_matrix, mean_squared_error
 from tabulate import tabulate
 
-from quadratic_with_cross_validation import quadratic_discrimination
-from pls_matrices import pls_matrices
+from lib.quadratic_with_cross_validation import quadratic_discrimination
+from lib.pls_matrices import pls_matrices
 import functools as ft
 
 np.random.seed(5)
