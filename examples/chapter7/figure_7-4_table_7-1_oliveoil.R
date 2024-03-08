@@ -1,7 +1,7 @@
 rm(list=ls())
 library(caret)
-source("examples/chapter7/lineal_with_R_more_classes.R")
-source("examples/chapter7/pls_matrices.R")
+source("examples/chapter7/lib/lineal_with_R_more_classes.R")
+source("examples/chapter7/lib/pls_matrices.R")
 library(readr)
 library(mltools)
 library(data.table)
@@ -11,7 +11,6 @@ library(caret)
 
 library(readr)
 FTIR_Spectra_olive_oils <- read_csv("data/chapter7/FTIR_Spectra_olive_oils.csv")
-#View(FTIR_Spectra_olive_oils)
 
 
 Y=as.factor(t(FTIR_Spectra_olive_oils[2,2:121]))
@@ -37,17 +36,14 @@ Dmax=33
 K=5
 
 
-### elijo el d aca
+### Use this loop to choose d
+
 error_lineal_PFC=NULL
 error_lineal_pls=NULL
 error_lineal_iso=NULL
 set.seed(1)
 for (d in 1:Dmax){
-  
-  #cat(", d = ", d)
-  
-  
-  
+
   aux=lineal.junto.small.R.more.classes(X,Y,K,d)
   
   li=as.numeric(aux$predict_lineal_pls)
@@ -78,29 +74,15 @@ aux_iso=lineal.junto.small.R.more.classes(X,Y,nrow(X),d_iso[1])$predict_lineal_i
 
 
 
-#para la tabla 7.1 la segunda linea primeras 3 columnas
+# For table 7.1, the second row, first 3 columns
 
-confusionMatrix(as.factor(aux_pls),as.factor(Y))$overall[1]
-confusionMatrix(as.factor(aux_PFC),as.factor(Y ))$overall[1]
-confusionMatrix(as.factor(aux_iso),as.factor(Y ))$overall[1]
+col1 = confusionMatrix(as.factor(aux_pls),as.factor(Y))$overall[1]
+col2 = confusionMatrix(as.factor(aux_PFC),as.factor(Y ))$overall[1]
+col3 = confusionMatrix(as.factor(aux_iso),as.factor(Y ))$overall[1]
 
+cat("Table 7.1\nDataset   | PLS  | ISO | PFC\nOlive Oil |", round(col1,2), "|", round(col2,2), "|", round(col3,2), "\n")
 
-
-
-
-
-
-
-
- 
-
-
-### pictures... 7.4
-
-
-
-
-
+### Figure 7.4
 
 #######pls 
 AUX=pls2_nipals(X ,Y ,d)$P[,1:d_pls]
@@ -198,7 +180,7 @@ ggplot(dfp_proj_iso, aes(x = V1, y = V2, shape = origins, color = origins)) +
 
 
 
-####pfc
+#### pfc
 
 
 

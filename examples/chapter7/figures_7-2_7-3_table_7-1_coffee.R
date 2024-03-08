@@ -5,8 +5,8 @@ library(matrixcalc)
 library(chemometrics)
 FTIR_Spectra_instant_coffee <-  read_csv("data/chapter7/coffee.csv")
  
-source("examples/chapter7/pls_matrices.R")
-source("examples/chapter7/lineal_with_R.R")
+source("examples/chapter7/lib/pls_matrices.R")
+source("examples/chapter7/lib/lineal_with_R.R")
 Y=(t(FTIR_Spectra_instant_coffee[2,2:57]))
 Y=as.factor(Y)
 

@@ -9,7 +9,7 @@ from tabulate import tabulate
 from sliced import SlicedInverseRegression
 import matplotlib.pyplot as plt
 
-from lineal_with_R_more_classes import lineal_junto_small_R_more_classes
+from lib.lineal_with_R_more_classes import lineal_junto_small_R_more_classes
 
 ## TABLE 7.1
 np.random.seed(180)

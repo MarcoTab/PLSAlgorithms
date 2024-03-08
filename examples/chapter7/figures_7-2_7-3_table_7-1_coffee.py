@@ -11,7 +11,7 @@ from tabulate import tabulate
 from sliced import SlicedInverseRegression
 import matplotlib.pyplot as plt
 
-from lineal_with_R import lineal_junto_small_R
+from lib.lineal_with_R import lineal_junto_small_R
 # import pls_matrices
 
 
