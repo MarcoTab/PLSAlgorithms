@@ -1,24 +1,32 @@
-rm(list=ls())
-library('pls')
- source("our_functions_Feb2nd2022.R")
+
 
 
 ###################
 # Skagerberg data #
 ###################
-source("our_functions_Feb2nd2022.R")
+######################################
+# REACTOR Second row of Table 5.9
+######################################
 library(readr)
-Skagerber_data <- read_csv("Process_data_Skagerberg1992 - Sheet1.csv")
+library('pls')
+#needed functions
+source("examples/chapter5/lib/ch5_misc_utils.R")
+
+
+
  
- 
+library(readr)
+Skagerber_data <- read_csv("data/chapter6/Process_data_Skagerberg1992 - Sheet1.csv")
+
+
 X=as.matrix(Skagerber_data[,1:22])
 Y=as.matrix(log(Skagerber_data[,23:28]))
 Y=Y%*%diag(diag(cov(Y))^(-1/2))
 a=sample(1:nrow(X),replace=F)
 a=c(45 ,38 ,23 ,27, 35 ,52, 11 ,51 ,29 ,37 , 8 ,48,  7, 12, 32, 28 ,
     21 ,54 ,33 ,25, 34 ,22 ,50, 20 ,41 ,16, 43,
-  1 , 3 ,44 ,24, 17 , 9 ,18 ,56 , 4 ,31, 10 ,26, 14, 53, 40, 15, 19, 42 ,39
-  ,30 , 2 ,46, 47,  6 ,49,  5, 13,
+    1 , 3 ,44 ,24, 17 , 9 ,18 ,56 , 4 ,31, 10 ,26, 14, 53, 40, 15, 19, 42 ,39
+    ,30 , 2 ,46, 47,  6 ,49,  5, 13,
     36 ,55)
 X=X[a,]
 Y=Y[a,]
@@ -40,25 +48,27 @@ pls_CV_Y_MSE.v=NULL
 cor_twoblock_Y_Yhat=NULL
 cor_simul_pls_Y_Yhat=NULL
 cor_pls_Y_Yhat=NULL
- nfold=10
- 
- 
- #elige los d
+nfold=10
+
+
+#choose d
 
 cv_result=cv_fun(X=Xtrain,Y=Ytrain,nfold=nfold,if.Xscale=if.Xscale,if.Yscale=F)
 
+
+#leave one out error
 result_LOO.list=apply(as.matrix(1:nrow(X)),1,cal_LOOMSE_onefold_fun,myX=X,myY=Y,d=cv_result$d,
                       d1=cv_result$d1,d2=cv_result$d2,
                       d_pls=cv_result$d_pls,d_pls1=cv_result$d_pls1, if.Xscale=if.Xscale,
                       if.Yscale=if.Yscale)
- 
- 
- 
- 
 
 
 
- 
+
+
+
+
+#computing errors
 
 for(i in 1:nrow(X)){
   if(i==1){
@@ -74,31 +84,32 @@ for(i in 1:nrow(X)){
   pls1_MSE_sum = pls_MSE_sum + sqrt(sum(result_LOO.list[[i]]$pls1_Y_MSE.v))
 }
 
- 
 
- 
- 
+
+#ols
+
 cal_ols_fun=function(i){
   ols_no1_Result=lm(Y[-i,]~X[-i,])
   mse_ols_1data=(Y[i,]-colMeans(Y[-i,])-(X[i,]-colMeans(X[-i,]))%*%ols_no1_Result$coefficients[-1,])^2
   return(mse_ols_1data)
 }
 
+#error ols
 mse_ols_1data=matrix(0,ncol=6,nrow=nrow(X))
 for (i in 1:nrow(X)){
   ols_no1_Result=lm(Y[-i,]~X[-i,])
   mse_ols_1data[i,]=(Y[i,]-colMeans(Y[-i,])-(X[i,]-colMeans(X[-i,]))%*%ols_no1_Result$coefficients[-1,])^2
-
-  }
-
-
- 
-
- 
-
-
-
   
+}
+
+
+
+
+
+
+
+
+
 
 
 #####simultaneous envelope
@@ -119,14 +130,14 @@ for (i in 1:nrow(X)){
 }
 
 
- 
-  ### todos lso errores juntos
+
+### all errs together
 
 
 A=c(mean(apply(sqrt(mse_ols_1data),1,sum)),twoblock_MSE_sum/nrow(X),mean(apply(sqrt(error_bic),1,sum)),pls_MSE_sum/nrow(X),simul_pls_MSE_sum/nrow(X),pls1_MSE_sum/nrow(X))
 names(A)=c("OLS","Two blocks","Simultaneous ENVELOPE","PLS","Simultaneous PLS","PLS1")
 
- 
+#second row table 5.9
+
 print(round(A,2))
- 
 

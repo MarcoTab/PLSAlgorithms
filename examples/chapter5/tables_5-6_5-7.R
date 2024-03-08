@@ -3,12 +3,19 @@ library(Matrix)
 library(MASS)
 library(Renvlp)
 library(xtable)
- 
-source("our_functions_Feb2nd2022.R")
-source("rrenv.R")
-source("rrenvMU.R")
-source("env.apweights.R")
-source("rrenv.apweights.R")
+
+###########################################
+###########################################
+## This is the code Table 5.6 and Table 5.7
+## from Chapter 5
+###########################################
+###########################################
+
+source("examples/chapter5/lib/ch5_misc_utils.R")
+source("examples/chapter5/lib/rrenv.R")
+source("examples/chapter5/lib/rrenvMU.R")
+source("examples/chapter5/lib/env.apweights.R")
+source("examples/chapter5/lib/rrenv.apweights.R")
 
 # function to generate simulations at the ith repetition
 
@@ -28,7 +35,7 @@ sim_fun_a=function(i,a,b,p,r,dx,dy,N,M){
   
   Eta = matrix(runif(dx*dy),nrow=dx)          # regression coefficient matrix of reduced Y on reduced X
   
- 
+  
   # case where simultaneous env is better than pls, and two block is not the best
   Omega = a*diag(dx);    # material variation in X
   Phi = b*diag(dy);      # material variation of Y|X
@@ -475,4 +482,3 @@ result.m=matrix(apply(sim_result,1,mean,na.rm=T),nrow=3)
 row.names(result.m)=c("predMSE1","predMSE2","betaMSE")
 colnames(result.m)=c("ols",'twoblock','stenv',"pls","simul_pls")
 xtable(result.m)
-

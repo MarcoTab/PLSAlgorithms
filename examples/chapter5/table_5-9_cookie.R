@@ -1,45 +1,49 @@
-
-#####################
-# cookie dough data #
-#####################
+##########################################
+##########################################
+# cookie dough data third row of Table 5.9
+##########################################
+##########################################
 
 library(groc)
-source("~/Dropbox/more-pls/pls-simultaneous/computing/our_functions_Feb2nd2022.R")
+library(readr)
+library('pls')
+#needed functions
+source("examples/chapter5/lib/ch5_misc_utils.R")
+
+
+
+##data
 data(cookie)
 library(Renvlp)
 
+#read data
 X<-(as.matrix(cookie[,1:700]) )# extract NIR spectra
 Y<-as.matrix(cookie[,701:704]) # extract constituents
 
-# X=X%*%eigen(cov(X))$vectors[,1:20]
-
-#X=scale(X,center=FALSE)
-#Y=scale(Y,center=FALSE)
-#a=sample(1:72, replace=FALSE)
-#X=X[a,]
-#Y=Y[a,]
-
+ 
+#training
 Xtrain<-X[1:40,] # extract training data
-
 Ytrain<-Y[1:40,] # extract training data
+
+#test
 Xtest<-X[41:72,] # extract test data
 Ytest<-Y[41:72,] # extract test data
 
-##saco unos outliers
- 
+##take away outliers
+
 Ytrain=as.matrix(Ytrain[-23,])
 
 Ytest =as.matrix(Ytest[-21,])
- 
+
 Xtrain=Xtrain[-23,]
 
- 
+
 Xtest=Xtest[-21,]
 
 
 
 
-##usamos solo 64 predictores
+##we use only 64 predictors
 
 Xtrain1=Xtrain[,seq(141,651,8)]
 Xtest1=Xtest[,seq(141,651,8)]
@@ -59,36 +63,16 @@ cor_simul_pls_Y_Yhat=NULL
 nfold=10
 set.seed(10)
 set.seed(8)
+
+#choose d
 cv_result=cv_fun(X=Xtrain1,Y=Ytrain,nfold=nfold,if.Xscale=if.Xscale,if.Yscale=if.Yscale)
- #d=4
-#d1=7
-#d2=2
+ 
 
-### el $d es el two block
-### el $d_pls1 es pls 1 elige uno para cada Y
-### el $d1 es el de simultaneo el primero
-### el $d2 es el simultaneo segundo
-### el $d_pls es el comun
-
-
-#d_pls=7, 4
-
-#cv_result$d_pls1
-#dim_X dim_Y
-#1    5     1
-#2     12     1
-#3     12     1
-#4     5     1
-#> 
-#> 
-#> 
-#> 
-#>
-#>
-#>
+ 
 
 probar=NULL
 
+#fit the test data
 refit_result=refit_entire_training_and_get_testMSE_fun(Xtrain1,Ytrain,Xtest1,Ytest,
                                                        d=cv_result$d,d1=cv_result$d1,
                                                        d2=cv_result$d2,d_pls=cv_result$d_pls,
@@ -99,12 +83,7 @@ refit_result=refit_entire_training_and_get_testMSE_fun(Xtrain1,Ytrain,Xtest1,Yte
 
 
 
-#> 
-#> 
-#> 
-#> 
-
-
+ 
 
 #two blocks
 
@@ -126,10 +105,8 @@ a3= mean(sqrt(apply(refit_result$simul_pls_Y_MSE.v,1,sum)))
 
 a4=mean(sqrt(apply(refit_result$pls1_Y_MSE.v, 1, sum)))
 
-
+#print of the third row of Table 5.9
 M=matrix(c(a1,a2,a3,a4),nrow=1)
 colnames(M)<-c("two blocks","pls","sumult","pls1")
 
 M
-
-

@@ -109,12 +109,12 @@ table6_2 <- matrix(c(1:15), ncol=5, byrow=TRUE)
 table6_2[1,] <- c('OLS', 'PLS (P.Predictor)', 'Envelope (P.Predictor)', 'PLS (P.Response)', 'Envelope (P.Response)')
 rownames(table6_2) <- c('Method', 'No. components', 'predRMSE')
 
-table6_2[3,1] = p.ols[1]
+table6_2[3,1] = round(p.ols[1], 2)
 table6_2[2,1] = "p1 = 20"
 table6_2[2,2] = which.min(p.pls)
-table6_2[3,2] = p.pls[which.min(p.pls)]
+table6_2[3,2] = round(p.pls[which.min(p.pls)], 2)
 table6_2[2,3] = which.min(p.env)
-table6_2[3,3] = p.env[which.min(p.env)]
+table6_2[3,3] = round(p.env[which.min(p.env)], 2)
 
 #######
 
@@ -224,11 +224,13 @@ for (d in 1:ncol(Y)){
 # Table 6.2 columns 5,6
 
 table6_2[2,4] = which.min(p.pls)
-table6_2[3,4] = p.pls[which.min(p.pls)]
+table6_2[3,4] = round(p.pls[which.min(p.pls)], 2)
 table6_2[2,5] = which.min(p.env)
-table6_2[3,5] = p.env[which.min(p.env)]
+table6_2[3,5] = round(p.env[which.min(p.env)], 2)
 
-table6_2
+
+cat("\n\n\n\nTable 6.2\n")
+print(table6_2)
 
 
 

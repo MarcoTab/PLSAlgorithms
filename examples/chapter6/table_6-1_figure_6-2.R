@@ -2,7 +2,7 @@ rm(list=ls())
 library(pls)
 library(glmnet)
 library(Rcpp)
-library(EPPLS)
+library(Renvlp)
 library(ggplot2)
 
 library(readr)
@@ -214,21 +214,21 @@ for (this_aux in table_lines) {
   
   # Calculate values for the table
   
-  table61$PPLS.q1[index] <- apply(MSE_PLS^2,2,mean)[d_PLS]
-  table61$PPCA.q1[index] <- apply(MSE_PCA^2,2,mean)[d_PCA]
-  table61$PPLS.1[index] <- apply(MSE_PLS^2,2,mean)[1]
-  table61$PPCA.1[index] <- apply(MSE_PCA^2,2,mean)[1]
-  table61$LASSO[index] <- mean(apply(MSE_LASSO^2,2,mean))
-  table61$FULL[index] <- apply(MSE_OLS^2,2,mean)[1]
-  table61$PPENV.q1[index] <- apply(MSE_EPLS^2,2,mean)[d_EPLS]
-  table61$PPENV.1[index] <- apply(MSE_EPLS^2,2,mean)[1]
+  table61$PPLS.q1[index] <- round(apply(MSE_PLS^2,2,mean)[d_PLS], 2)
+  table61$PPCA.q1[index] <- round(apply(MSE_PCA^2,2,mean)[d_PCA], 2)
+  table61$PPLS.1[index] <- round(apply(MSE_PLS^2,2,mean)[1], 2)
+  table61$PPCA.1[index] <- round(apply(MSE_PCA^2,2,mean)[1], 2)
+  table61$LASSO[index] <- round(mean(apply(MSE_LASSO^2,2,mean)), 2)
+  table61$FULL[index] <- round(apply(MSE_OLS^2,2,mean)[1], 2)
+  table61$PPENV.q1[index] <- round(apply(MSE_EPLS^2,2,mean)[d_EPLS], 2)
+  table61$PPENV.1[index] <- round(apply(MSE_EPLS^2,2,mean)[1], 2)
   
   index = index + 1
   
 }
 
 # End table generation
-print(knitr::kable(table61, "simple", caption="6.1"))
+print(knitr::kable(table61, "simple", caption="Table 6.1"))
 
 
 
