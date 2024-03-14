@@ -66,4 +66,5 @@ for h in range(nrep):
         ml = semopy.Model(MODEL)
         ml.fit(dataframe, obj="FIML")
         # pprint.pprint(ml.inspect(mode="mx", std_est=True))
+        # TODO Unfinished script
         exit()
