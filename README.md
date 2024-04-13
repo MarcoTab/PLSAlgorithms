@@ -2,6 +2,8 @@
 
 **PLSLib** is a collection of Python and R scripts demonstrating the different algorithms detailed in *Partial Least Squares Regression and Related Dimension Reduction Methods* by R. Dennis Cook and Liliana Forzani, available [here](https://lforzani.github.io/PLSR-book/).
 
+We are open to pull requests for translating R scripts into Python and also bugfixes, if you find any.
+
 ## Usage
 
 ### Download the Files
